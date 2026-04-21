@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Student Report Card (Image #3 Style)</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+	<style>
+		:root { --navy:#1e3a8a; --red:#be123c; --border:#0f172a; }
+		*{ box-sizing:border-box; margin:0; padding:0; }
+		body{ font-family:'DM Sans','Battambang',sans-serif; background:#eef2f7; padding:18px; }
+
+		/* Controls */
+		.ctrl{
+			max-width:1100px; margin:0 auto 16px; background:#fff; border-radius:12px;
+			padding:16px; box-shadow:0 4px 18px rgba(0,0,0,.08);
+		}
+		.ctrl h1{ font-family:'Playfair Display',serif; font-size:18pt; color:var(--navy); margin-bottom:10px; }
+		.grid{
+			display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap:12px; align-items:end;
+		}
+		label{ display:block; font-size:9pt; font-weight:700; color:#475569; margin-bottom:5px; text-transform:uppercase; letter-spacing:.4px; }
+		input, select, textarea{
+			width:100%; padding:10px 12px; border:1.5px solid #cbd5e1; border-radius:8px; font-family:inherit;
+			font-size:10pt; outline:none;
+		}
+		textarea{ min-height:84px; resize:vertical; }
+		.btnbar{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+		button{
+			border:none; padding:10px 14px; border-radius:8px; font-weight:800; cursor:pointer;
+			font-family:inherit; font-size:10pt;
+		}
+		.btn-blue{ background:var(--navy); color:#fff; }
+		.btn-gold{ background:#f59e0b; color:#111827; }
+		.btn-gray{ background:#64748b; color:#fff; }
+
+		.hint{ margin-top:10px; font-size:10pt; color:#475569; line-height:1.6; }
+
+		/* PDF/print container */
+		.rc-wrap{
+			display:none;
+			width:210mm;
+			background:#fff;
+			margin:0 auto;
+			border:1px solid #ddd;
+		}
+		.rc-page{
+			width:210mm;
+			min-height:297mm;
+			padding:12mm;
+			background:#fff;
+			page-break-after:always;
+		}
+
+		/* Report Card (matches Image #3 style) */
+		.rc-title-box{ text-align:center; margin-bottom:8mm; }
+		.rc-title{ font-family:'Playfair Display',serif; font-size:18pt; font-weight:700; color:var(--red); text-transform:uppercase; }
+		.rc-subtitle{ font-family:'Playfair Display',serif; font-size:12.5pt; font-weight:700; color:var(--navy); margin-top:2mm; }
+		.rc-term{ font-size:10pt; color:#0f172a; margin-top:2mm; }
+
+		.rc-info-row{ display:flex; gap:10mm; align-items:stretch; margin-bottom:6mm; }
+		.rc-info-left{ flex:1; }
+		.rc-info-table{ width:100%; border-collapse:collapse; font-size:10.5pt; }
+		.rc-info-table td{
+			border:1px solid #000; padding:6px 8px; vertical-align:middle;
+		}
+		.rc-info-table td:first-child{ width:34%; background:#f1f5f9; font-weight:800; }
+
+		.rc-photo-box{
+			width:38mm; min-height:46mm; border:1.8px solid #000; display:flex; align-items:center; justify-content:center;
+			background:#fff; overflow:hidden; position:relative;
+		}
+		.rc-photo-box img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+		.rc-score-tbl{ width:100%; border-collapse:collapse; font-size:10.5pt; margin-top:2mm; }
+		.rc-score-tbl th, .rc-score-tbl td{
+			border:1px solid #000; padding:6px 6px; text-align:center;
+		}
+		.rc-score-tbl th{ background:#f1f5f9; font-weight:900; font-size:10pt; }
+		.rc-score-tbl td.crit-name{ text-align:left; font-weight:700; padding-left:10px; }
+		.rc-score-tbl td.std-pct{ color:#334155; }
+
+		.rc-total-row td{ background:#fef9c3; font-weight:900; font-size:11.5pt; }
+		.rc-result-pass{ font-weight:900; }
+		.rc-result-fail{ font-weight:900; }
+
+		.rc-bottom{
+			display:flex; justify-content:space-between; gap:10mm; margin-top:7mm; align-items:flex-end;
+		}
+
+		.rc-grade-table{ border-collapse:collapse; font-size:9.5pt; min-width:78mm; }
+		.rc-grade-table th, .rc-grade-table td{ border:1px solid #000; padding:5px 7px; }
+		.rc-grade-table th{ background:#f1f5f9; font-weight:900; }
+
+		.rc-kh-text{
+			min-width:82mm; text-align:center; font-family:'Battambang','DM Sans',sans-serif;
+			font-size:10.5pt; line-height:1.75;
+		}
+		.rc-sign{
+			margin-top:18mm; border-top:1px solid #000; padding-top:3px; font-weight:900;
+		}
+
+		.rc-footer{
+			display:flex; justify-content:space-between; margin-top:10mm; font-size:10pt;
+		}
+		.rc-footer-col{ text-align:center; min-width:70mm; }
+		.rc-sig-line{ border-top:1px solid #000; margin-top:14mm; padding-top:3px; font-weight:900; }
+
+		@media print{
+			body{ background:#fff; padding:0; }
+			.ctrl{ display:none !important; }
+			.rc-wrap{ display:block !important; border:none; }
+		}
+	</style>
+</head>
+
+<body>
+	<div class="ctrl">
+		<h1>Student Report Card (Image #3 Style)</h1>
+
+		<div class="grid">
+			<div>
+				<label>Program Title</label>
+				<input id="programTitle" value="Foundation to Primary English Program"/>
+			</div>
+			<div>
+				<label>Academic Grade / Term</label>
+				<input id="termTitle" value="Academic Grade of Term 1 2025"/>
+			</div>
+			<div>
+				<label>Teacher Name</label>
+				<input id="teacherName" value="Dorn Sreyneth"/>
+			</div>
+			<div>
+				<label>Default Result</label>
+				<select id="defaultResult">
+					<option value="Pass" selected>Pass</option>
+					<option value="Fail">Fail</option>
+				</select>
+			</div>
+		</div>
+
+		<div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:12px; margin-top:12px;">
+			<div>
+				<label>Students (one per line: Name | Gender | Level | Room | Time | PhotoURL optional)</label>
+				<textarea id="studentsText">Hong Sothinal | M | Level 1 Book A | L1 | Afternoon | 
+Student Two | F | Level 1 Book A | L1 | Afternoon |</textarea>
+			</div>
+			<div>
+				<label>Issue Date (Khmer)</label>
+				<select id="dateMode">
+					<option value="today" selected>Today</option>
+					<option value="custom">Custom</option>
+				</select>
+				<div style="margin-top:10px;">
+					<label>Custom Date (YYYY-MM-DD)</label>
+					<input id="customDate" value="2026-04-07"/>
+				</div>
+			</div>
+			<div>
+				<label>Download</label>
+				<div class="btnbar" style="margin-top:0;">
+					<button class="btn-blue" onclick="generateReportCards()">Generate Report Cards</button>
+					<button class="btn-gold" onclick="downloadPDF()">Download PDF</button>
+					<button class="btn-gray" onclick="clearOutput()">Clear</button>
+				</div>
+				<div class="hint">
+					- This file generates a printable PDF.<br>
+					- Top banner image is removed (matches image #3).<br>
+					- Date is Khmer format.
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="rcOutput" class="rc-wrap"></div>
+
+<script>
+	/* Khmer date helpers */
+	function toKhmerDigits(s){
+		return String(s).replace(/\d/g, d => "០១២៣៤៥៦៧៨៩"[d]);
+	}
+	function khmerDateString(date = new Date()){
+		const months = ["មករា","កុម្ភៈ","មិនា","មេសា","ឧសភា","មិថុនា","កក្កដា","សីហា","កញ្ញា","តុលា","វិច្ឆិកា","ធ្នូ"];
+		const dd = toKhmerDigits(String(date.getDate()).padStart(2,"0"));
+		const mm = months[date.getMonth()];
+		const yyyy = toKhmerDigits(date.getFullYear());
+		return `ថ្ងៃទី ${dd} ខែ ${mm} ឆ្នាំ ${yyyy}`;
+	}
+
+	function parseStudents(text){
+		return text
+			.split("\n")
+			.map(l => l.trim())
+			.filter(Boolean)
+			.map(line => {
+				const parts = line.split("|").map(x => x.trim());
+				return {
+					name: parts[0] || "",
+					gender: parts[1] || "",
+					level: parts[2] || "",
+					room: parts[3] || "",
+					time: parts[4] || "",
+					photo: parts[5] || ""
+				};
+			});
+	}
+
+	function rcPageHTML(student, opts){
+		const resultClass = opts.result === "Pass" ? "rc-result-pass" : "rc-result-fail";
+		const issueKh = opts.issueKh;
+
+		// Photo box: show image if URL exists, otherwise empty box like the template
+		const photoHTML = student.photo
+			? `<img src="${student.photo}" alt="Photo">`
+			: "";
+
+		return `
+		<div class="rc-page">
+			<div class="rc-title-box">
+				<div class="rc-title">Student Report Card</div>
+				<div class="rc-subtitle">${opts.programTitle}</div>
+				<div class="rc-term">${opts.termTitle}</div>
+				<div class="rc-term">${issueKh}</div>
+			</div>
+
+			<div class="rc-info-row">
+				<div class="rc-info-left">
+					<table class="rc-info-table">
+						<tr><td>Student:</td><td>${student.name}</td></tr>
+						<tr><td>Level:</td><td>${student.level}</td></tr>
+						<tr><td>Gender:</td><td>${student.gender}</td></tr>
+						<tr><td>Room:</td><td>${student.room}</td></tr>
+						<tr><td>Teacher:</td><td>${opts.teacherName}</td></tr>
+						<tr><td>Time:</td><td>${student.time}</td></tr>
+					</table>
+				</div>
+				<div class="rc-photo-box">
+					${photoHTML || "<div style='font-size:9pt;color:#64748b;font-weight:700;'>PHOTO</div>"}
+				</div>
+			</div>
+
+			<table class="rc-score-tbl">
+				<thead>
+					<tr>
+						<th style="width:10mm;">No.</th>
+						<th>Criteria</th>
+						<th style="width:30mm;">Standard Score %</th>
+						<th style="width:36mm;">Achievement Score %</th>
+						<th style="width:22mm;">Grade</th>
+						<th style="width:18mm;">Rank</th>
+						<th style="width:28mm;">Total Score</th>
+						<th style="width:22mm;">Result</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td><td class="crit-name">Attendance</td><td class="std-pct">10%</td>
+						<td></td><td></td><td></td><td></td>
+						<td rowspan="10" class="${resultClass}">${opts.result}</td>
+					</tr>
+					<tr><td>2</td><td class="crit-name">Homework</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>3</td><td class="crit-name">Quiz</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>4</td><td class="crit-name">Assignment</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>5</td><td class="crit-name">Art</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>6</td><td class="crit-name">Mix Skills</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>7</td><td class="crit-name">Listening</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>8</td><td class="crit-name">Speaking</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>9</td><td class="crit-name">Life Skills</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+					<tr><td>10</td><td class="crit-name">Chinese</td><td class="std-pct">10%</td><td></td><td></td><td></td><td></td></tr>
+
+					<tr class="rc-total-row">
+						<td colspan="6">Total</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="rc-bottom">
+				<table class="rc-grade-table">
+					<tr><th>Grading system</th><th>%</th></tr>
+					<tr><td>A &nbsp; Excellent</td><td>90-100</td></tr>
+					<tr><td>B &nbsp; Very Good</td><td>80-89</td></tr>
+					<tr><td>C &nbsp; Good</td><td>70-79</td></tr>
+					<tr><td>D &nbsp; Above average</td><td>60-69</td></tr>
+					<tr><td>E &nbsp; Average</td><td>50-59</td></tr>
+					<tr><td>F &nbsp; Fail</td><td>Below 50 Percent</td></tr>
+				</table>
+
+				<div class="rc-kh-text">
+					<div>
+						បានទទួលពិន្ទុ ៩០ ភាគរយ ដល់ ១០០ ភាគរយ<br>
+						ទទួលបាននិទ្ទេស A<br>
+						ចំណាត់ថ្នាក់ល្អប្រសើរ
+					</div>
+					<div class="rc-sign">______________________</div>
+				</div>
+			</div>
+
+			<div class="rc-footer">
+				<div class="rc-footer-col">
+					<div class="rc-sig-line">Teacher</div>
+				</div>
+				<div class="rc-footer-col">
+					<div class="rc-sig-line">Principal</div>
+				</div>
+			</div>
+		</div>`;
+	}
+
+	function generateReportCards(){
+		const programTitle = document.getElementById("programTitle").value.trim();
+		const termTitle = document.getElementById("termTitle").value.trim();
+		const teacherName = document.getElementById("teacherName").value.trim();
+		const result = document.getElementById("defaultResult").value;
+
+		const dateMode = document.getElementById("dateMode").value;
+		const customDate = document.getElementById("customDate").value.trim();
+
+		let dateObj = new Date();
+		if(dateMode === "custom"){
+			// Use local date (avoid timezone shift)
+			const m = customDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+			if(m){
+				dateObj = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+			}
+		}
+		const issueKh = khmerDateString(dateObj);
+
+		const students = parseStudents(document.getElementById("studentsText").value);
+		const out = document.getElementById("rcOutput");
+
+		const opts = { programTitle, termTitle, teacherName, result, issueKh };
+
+		out.innerHTML = students.map(s => rcPageHTML(s, opts)).join("\n");
+		out.style.display = "block";
+		window.scrollTo({ top: out.offsetTop - 10, behavior: "smooth" });
+	}
+
+	function clearOutput(){
+		const out = document.getElementById("rcOutput");
+		out.innerHTML = "";
+		out.style.display = "none";
+	}
+
+	async function downloadPDF(){
+		const wrap = document.getElementById("rcOutput");
+		if(!wrap || wrap.style.display === "none" || !wrap.innerHTML.trim()){
+			alert("Please click Generate Report Cards first.");
+			return;
+		}
+
+		const { jsPDF } = window.jspdf;
+		const pdf = new jsPDF("p", "mm", "a4");
+
+		const pages = Array.from(wrap.querySelectorAll(".rc-page"));
+		for(let i=0; i<pages.length; i++){
+			const pageEl = pages[i];
+
+			const canvas = await html2canvas(pageEl, { scale: 2, useCORS: true });
+			const imgData = canvas.toDataURL("image/png");
+
+			const pageWidth = 210;
+			const pageHeight = 297;
+
+			if(i > 0) pdf.addPage();
+			pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight);
+		}
+
+		pdf.save("Student-Report-Cards.pdf");
+	}
+</script>
+</body>
+</html>
