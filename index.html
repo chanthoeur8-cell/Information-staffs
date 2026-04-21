@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>គ្រប់គ្រងបុគ្គលិក</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#0f2744;--blue:#1a56db;--blue-lt:#e8f0fe;
+  --green:#0d7a4a;--green-lt:#e6f7f0;
+  --amber:#b45309;--amber-lt:#fef3c7;
+  --red:#b91c1c;--red-lt:#fee2e2;
+  --pink-lt:#fce7f3;--pink:#9d174d;
+  --bg:#f0f2f5;--surface:#fff;--border:#dde1e8;
+  --text:#111827;--muted:#6b7280;
+  --radius:10px;--shadow:0 1px 4px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Khmer',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+.topbar{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-brand span{font-size:16px;font-weight:600;color:#fff}
+.topbar-brand sub{font-size:11px;color:#90a4c8;font-weight:300;margin-left:4px}
+.topbar-actions{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:500;transition:all .15s;white-space:nowrap}
+.btn-white{background:#fff;color:var(--navy);border:1px solid var(--border)}.btn-white:hover{background:#f5f7ff}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1446b8}
+.btn-tg{background:#229ed9;color:#fff}.btn-tg:hover{background:#1a88c0}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#0a6340}
+.btn-sm{padding:5px 10px;font-size:12px;border-radius:6px}
+.btn-icon{padding:5px 8px;border-radius:6px;background:transparent;border:1px solid transparent;cursor:pointer;font-size:15px;transition:background .12s}.btn-icon:hover{background:#f0f2f5}
+.page{max-width:1100px;margin:0 auto;padding:20px 16px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;box-shadow:var(--shadow)}
+.stat-card .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.stat-card .val{font-size:28px;font-weight:700;line-height:1}
+.stat-card .sub{font-size:11px;color:var(--muted);margin-top:4px}
+.c-navy{color:var(--navy)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}
+.c-amber{color:var(--amber)}.c-red{color:var(--red)}.c-pink{color:var(--pink)}
+.main-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+.card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card-header-left{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:180px}
+.search-box input{width:100%;padding:8px 12px 8px 36px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;outline:none;background:#f9fafb}
+.search-box input:focus{border-color:var(--blue);background:#fff}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+select.filter{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;background:#f9fafb;outline:none;color:var(--text);cursor:pointer}
+select.filter:focus{border-color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);background:#f9fafb;white-space:nowrap}
+tbody td{padding:11px 14px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#f7f9ff}
+.name-cell{font-weight:500}
+.dept-cell,.date-cell{color:var(--muted);font-size:12px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge-m{background:var(--blue-lt);color:var(--blue)}
+.badge-f{background:var(--pink-lt);color:var(--pink)}
+.badge-active{background:var(--green-lt);color:var(--green)}
+.badge-resigned{background:var(--amber-lt);color:var(--amber)}
+.badge-terminated{background:var(--red-lt);color:var(--red)}
+.action-pills{display:flex;gap:4px;flex-wrap:wrap}
+.pill{padding:4px 10px;border-radius:99px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .12s;font-family:inherit}
+.pill-resigned{background:var(--amber-lt);color:var(--amber);border-color:#fcd34d}.pill-resigned:hover{background:#fde68a}
+.pill-terminated{background:var(--red-lt);color:var(--red);border-color:#fca5a5}.pill-terminated:hover{background:#fecaca}
+.pill-active{background:var(--green-lt);color:var(--green);border-color:#6ee7b7}.pill-active:hover{background:#a7f3d0}
+.table-wrap{overflow-x:auto}
+.empty{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-icon{font-size:40px;margin-bottom:10px}
+.card-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}
+.pg-btns{display:flex;gap:4px}
+.pg-btn{padding:4px 9px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px;font-family:inherit}
+.pg-btn:hover{background:#f0f2f5}.pg-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.pg-btn:disabled{opacity:.4;cursor:default}
+.modal-mask{position:fixed;inset:0;background:rgba(10,20,40,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px}
+.modal-box{background:#fff;border-radius:14px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{font-size:16px;font-weight:600}
+.modal-body{padding:20px}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.form-row{margin-bottom:14px}
+.form-row label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;outline:none;color:var(--text);background:#f9fafb}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(26,86,219,.1)}
+.form-row textarea{resize:vertical;min-height:60px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-full{grid-column:1/-1}
+.opt-tag{font-size:10px;color:#9ca3af;font-weight:400;text-transform:none;margin-left:4px}
+.status-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.status-opt{padding:10px 6px;border-radius:8px;border:2px solid var(--border);cursor:pointer;text-align:center;font-size:12px;font-weight:600;transition:all .12s;background:#f9fafb;line-height:1.6}
+.status-opt:hover{border-color:#93c5fd}
+.sel-active{border-color:var(--green)!important;background:var(--green-lt)!important;color:var(--green)!important}
+.sel-resigned{border-color:var(--amber)!important;background:var(--amber-lt)!important;color:var(--amber)!important}
+.sel-terminated{border-color:var(--red)!important;background:var(--red-lt)!important;color:var(--red)!important}
+.tg-bar{background:linear-gradient(135deg,#1a3a6e 0%,#0f2744 100%);border-radius:var(--radius);padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tg-bar-text{flex:1;min-width:160px}
+.tg-bar-text strong{font-size:13px;color:#fff;display:block}
+.tg-bar-text span{font-size:11px;color:#90a4c8}
+.tg-dot{width:8px;height:8px;border-radius:50%;background:#10b981;flex-shrink:0;box-shadow:0 0 6px #10b981;animation:pulse 2s infinite}
+.tg-dot.off{background:#ef4444;box-shadow:0 0 6px #ef4444;animation:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px #10b981}50%{box-shadow:0 0 12px #10b981}}
+.toast{position:fixed;bottom:24px;right:24px;background:#111;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:320px}
+.toast.show{opacity:1;transform:translateY(0)}
+#cv{position:absolute;left:-9999px;top:-9999px}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}.topbar{padding:0 12px}.page{padding:14px 10px}.status-picker{grid-template-columns:1fr}.topbar-actions{gap:4px}.btn{padding:7px 10px;font-size:12px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <span>👥 គ្រប់គ្រងបុគ្គលិក<sub>Staff Management</sub></span>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-tg" onclick="openTgModal()">✈ Telegram</button>
+    <button class="btn btn-white" onclick="sendReport()">📊 ផ្ញើរបាយការណ៍</button>
+    <button class="btn btn-blue" onclick="openForm()">＋ បន្ថែម</button>
+  </div>
+</div>
+
+<div class="page">
+  <!-- TG STATUS BAR -->
+  <div class="tg-bar" id="tgBar">
+    <div class="tg-dot" id="tgDot"></div>
+    <div class="tg-bar-text">
+      <strong>Telegram ភ្ជាប់ហើយ ✓</strong>
+      <span id="tgBarSub">Auto-notification បើក — ផ្ញើ Image ស្អាតដូច Excel ទៅ Group</span>
+    </div>
+    <button class="btn btn-sm" id="tgToggleBtn" onclick="toggleTg()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">បិទ</button>
+    <button class="btn btn-sm" onclick="openTgModal()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">⚙ កំណត់</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-grid" id="stats"></div>
+
+  <!-- TABLE -->
+  <div class="main-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="ស្វែងរកឈ្មោះ ឬ នាយកដ្ឋាន..." oninput="applyFilter()">
+        </div>
+        <select class="filter" id="fSex" onchange="applyFilter()">
+          <option value="">ភេទទាំងអស់</option>
+          <option value="ប្រុស">ប្រុស</option>
+          <option value="ស្រី">ស្រី</option>
+        </select>
+        <select class="filter" id="fStatus" onchange="applyFilter()">
+          <option value="">ស្ថានភាពទាំងអស់</option>
+          <option value="កំពុងធ្វើការ">កំពុងធ្វើការ</option>
+          <option value="ឈប់ខ្លួនឯង">ឈប់ខ្លួនឯង</option>
+          <option value="ត្រូវបញ្ឈប់">ត្រូវបញ្ឈប់</option>
+        </select>
+        <select class="filter" id="fDept" onchange="applyFilter()">
+          <option value="">នាយកដ្ឋានទាំងអស់</option>
+        </select>
+      </div>
+      <button class="btn btn-sm btn-green" onclick="exportCSV()">⬇ CSV</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th>ឈ្មោះ</th>
+            <th>ភេទ</th>
+            <th>នាយកដ្ឋាន</th>
+            <th>ចូលធ្វើការ</th>
+            <th>ស្ថានភាព</th>
+            <th>ថ្ងៃឈប់</th>
+            <th style="width:170px">ប្តូរស្ថានភាព</th>
+            <th style="width:80px">សកម្មភាព</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div id="emptyState" class="empty" style="display:none">
+        <div class="empty-icon">📋</div>
+        <div>មិនទាន់មានបុគ្គលិក — ចុច "＋ បន្ថែម" ដើម្បីដាក់ឈ្មោះ</div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span id="pageInfo"></span>
+      <div class="pg-btns" id="pgBtns"></div>
+    </div>
+  </div>
+</div>
+
+<canvas id="cv"></canvas>
+
+<!-- MODAL -->
+<div class="modal-mask" id="modal" style="display:none" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle"></h3>
+      <button class="btn-icon" onclick="closeModal()" style="font-size:18px">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════
+   TELEGRAM — pre-configured
+═══════════════════════════════════════ */
+let tgCfg = {
+  token:   '8253508040:AAHqbIxWCBTHGHv-9oLRQXAT2hqWJE6U3wY',
+  chatId:  '-1003938048448',
+  enabled: true
+};
+
+/* ═══════════════════════════════════════
+   STATE
+═══════════════════════════════════════ */
+let staff = [];
+let nextId = 1;
+let filtered = [];
+let page = 1;
+const PER = 10;
+let editId = null;
+let selStatus = 'កំពុងធ្វើការ';
+
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+let toastTimer;
+function showToast(msg, type='info'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = type==='ok'?'#065f46':type==='err'?'#7f1d1d':type==='warn'?'#78350f':'#1e3a5f';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+/* ═══════════════════════════════════════
+   STATS
+═══════════════════════════════════════ */
+function pct(n,t){ return t ? Math.round(n/t*100) : 0; }
+
+function renderStats(){
+  const t=staff.length, m=staff.filter(s=>s.sex==='ប្រុស').length,
+        f=staff.filter(s=>s.sex==='ស្រី').length,
+        a=staff.filter(s=>s.status==='កំពុងធ្វើការ').length,
+        r=staff.filter(s=>s.status==='ឈប់ខ្លួនឯង').length,
+        d=staff.filter(s=>s.status==='ត្រូវបញ្ឈប់').length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><div class="lbl">👥 សរុបទាំងអស់</div><div class="val c-navy">${t}</div><div class="sub">នាក់</div></div>
+    <div class="stat-card"><div class="lbl">👨 ប្រុស</div><div class="val c-blue">${m}</div><div class="sub">${pct(m,t)}% នៃសរុប</div></div>
+    <div class="stat-card"><div class="lbl">👩 ស្រី</div><div class="val c-pink">${f}</div><div class="sub">${pct(f,t)}% នៃសរុប</div></div>
+    <div class="stat-card"><div class="lbl">🟢 កំពុងធ្វើការ</div><div class="val c-green">${a}</div><div class="sub">${pct(a,t)}%</div></div>
+    <div class="stat-card"><div class="lbl">🟡 ឈប់ខ្លួនឯង</div><div class="val c-amber">${r}</div><div class="sub">${pct(r,t)}%</div></div>
+    <div class="stat-card"><div class="lbl">🔴 ត្រូវបញ្ឈប់</div><div class="val c-red">${d}</div><div class="sub">${pct(d,t)}%</div></div>`;
+}
+
+/* ═══════════════════════════════════════
+   DEPT FILTER
+═══════════════════════════════════════ */
+function refreshDepts(){
+  const depts = [...new Set(staff.map(s=>s.dept).filter(Boolean))].sort();
+  const sel = document.getElementById('fDept');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">នាយកដ្ឋានទាំងអស់</option>'
+    + depts.map(d=>`<option value="${d}" ${d===cur?'selected':''}>${d}</option>`).join('');
+}
+
+/* ═══════════════════════════════════════
+   FILTER & TABLE
+═══════════════════════════════════════ */
+function applyFilter(){
+  const q      = document.getElementById('searchInput').value.toLowerCase();
+  const sex    = document.getElementById('fSex').value;
+  const status = document.getElementById('fStatus').value;
+  const dept   = document.getElementById('fDept').value;
+  filtered = staff.filter(s=>
+    (!q || s.name.toLowerCase().includes(q) || (s.dept||'').toLowerCase().includes(q)) &&
+    (!sex    || s.sex===sex) &&
+    (!status || s.status===status) &&
+    (!dept   || s.dept===dept)
+  );
+  page = 1; renderTable();
+}
+
+function renderTable(){
+  const total = filtered.length;
+  const pages = Math.max(1, Math.ceil(total/PER));
+  if(page>pages) page=pages;
+  const start = (page-1)*PER;
+  const rows  = filtered.slice(start, start+PER);
+  const tbody = document.getElementById('tbody');
+  const empty = document.getElementById('emptyState');
+
+  if(!rows.length){ tbody.innerHTML=''; empty.style.display='block'; }
+  else {
+    empty.style.display='none';
+    tbody.innerHTML = rows.map((s,i)=>{
+      const sb = s.status==='កំពុងធ្វើការ'?'badge-active':s.status==='ឈប់ខ្លួនឯង'?'badge-resigned':'badge-terminated';
+      return `<tr>
+        <td style="color:#9ca3af;font-size:12px">${start+i+1}</td>
+        <td><div class="name-cell">${s.name}</div></td>
+        <td><span class="badge ${s.sex==='ប្រុស'?'badge-m':'badge-f'}">${s.sex}</span></td>
+        <td class="dept-cell">${s.dept||'—'}</td>
+        <td class="date-cell">${s.joinDate||'—'}</td>
+        <td><span class="badge ${sb}">${s.status}</span></td>
+        <td class="date-cell">${s.leaveDate||'—'}</td>
+        <td><div class="action-pills">
+          ${s.status!=='ឈប់ខ្លួនឯង'?`<button class="pill pill-resigned" onclick="setStatus(${s.id},'ឈប់ខ្លួនឯង')">ឈប់ខ្លួន</button>`:''}
+          ${s.status!=='ត្រូវបញ្ឈប់'?`<button class="pill pill-terminated" onclick="setStatus(${s.id},'ត្រូវបញ្ឈប់')">បញ្ឈប់</button>`:''}
+          ${s.status!=='កំពុងធ្វើការ'?`<button class="pill pill-active" onclick="setStatus(${s.id},'កំពុងធ្វើការ')">ធ្វើការ</button>`:''}
+        </div></td>
+        <td><div style="display:flex;gap:2px">
+          <button class="btn-icon" onclick="openForm(${s.id})">✏️</button>
+          <button class="btn-icon" onclick="deleteStaff(${s.id})">🗑️</button>
+        </div></td>
+      </tr>`;
+    }).join('');
+  }
+
+  document.getElementById('pageInfo').textContent =
+    total===0?'មិនមានទិន្នន័យ':`បង្ហាញ ${start+1}–${Math.min(start+PER,total)} នៃ ${total} នាក់`;
+
+  let btns=`<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>‹</button>`;
+  for(let p=1;p<=pages;p++){
+    if(pages<=7||p===1||p===pages||Math.abs(p-page)<=1)
+      btns+=`<button class="pg-btn ${p===page?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    else if(Math.abs(p-page)===2) btns+=`<span style="padding:4px;color:#9ca3af">…</span>`;
+  }
+  btns+=`<button class="pg-btn" onclick="goPage(${page+1})" ${page===pages?'disabled':''}>›</button>`;
+  document.getElementById('pgBtns').innerHTML = btns;
+}
+
+function goPage(p){
+  const pages=Math.ceil(filtered.length/PER);
+  if(p<1||p>pages) return;
+  page=p; renderTable();
+}
+
+/* ═══════════════════════════════════════
+   SET STATUS (quick pills)
+═══════════════════════════════════════ */
+function setStatus(id, status){
+  const s = staff.find(x=>x.id===id);
+  s.status = status;
+  if(status!=='កំពុងធ្វើការ' && !s.leaveDate)
+    s.leaveDate = new Date().toISOString().slice(0,10);
+  if(status==='កំពុងធ្វើការ') s.leaveDate='';
+  renderStats(); applyFilter();
+  showToast(`${s.name} → ${status}`,'ok');
+  sendAutoAlert('EDIT', s);
+}
+
+/* ═══════════════════════════════════════
+   FORM MODAL
+═══════════════════════════════════════ */
+function openForm(id){
+  editId = id||null;
+  const s = id ? staff.find(x=>x.id===id) : null;
+  selStatus = s ? s.status : 'កំពុងធ្វើការ';
+
+  document.getElementById('modalTitle').textContent = s?'កែប្រែបុគ្គលិក':'បន្ថែមបុគ្គលិកថ្មី';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-grid">
+      <div class="form-row form-full">
+        <label>ឈ្មោះពេញ *</label>
+        <input id="fName" value="${s?s.name:''}" placeholder="ដាក់ឈ្មោះបុគ្គលិក...">
+      </div>
+      <div class="form-row">
+        <label>ភេទ *</label>
+        <select id="fSexVal">
+          <option ${(!s||s.sex==='ប្រុស')?'selected':''}>ប្រុស</option>
+          <option ${s&&s.sex==='ស្រី'?'selected':''}>ស្រី</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>នាយកដ្ឋាន *</label>
+        <input id="fDeptVal" value="${s?s.dept:''}" placeholder="ឈ្មោះនាយកដ្ឋាន...">
+      </div>
+      <div class="form-row">
+        <label>ចូលធ្វើការ <span class="opt-tag">(មិនចាំបាច់)</span></label>
+        <input type="date" id="fJoin" value="${s?s.joinDate:''}">
+      </div>
+      <div class="form-row">
+        <label>ថ្ងៃឈប់ <span class="opt-tag">(មិនចាំបាច់)</span></label>
+        <input type="date" id="fLeave" value="${s?s.leaveDate:''}">
+      </div>
+      <div class="form-row form-full">
+        <label>ស្ថានភាព *</label>
+        <div class="status-picker">
+          <div class="status-opt ${selStatus==='កំពុងធ្វើការ'?'sel-active':''}" onclick="pickStatus('កំពុងធ្វើការ')">🟢<br>កំពុងធ្វើការ</div>
+          <div class="status-opt ${selStatus==='ឈប់ខ្លួនឯង'?'sel-resigned':''}" onclick="pickStatus('ឈប់ខ្លួនឯង')">🟡<br>ឈប់ខ្លួនឯង</div>
+          <div class="status-opt ${selStatus==='ត្រូវបញ្ឈប់'?'sel-terminated':''}" onclick="pickStatus('ត្រូវបញ្ឈប់')">🔴<br>ត្រូវបញ្ឈប់</div>
+        </div>
+      </div>
+      <div class="form-row form-full">
+        <label>កំណត់ចំណាំ <span class="opt-tag">(មិនចាំបាច់)</span></label>
+        <textarea id="fNote" placeholder="...">${s?s.note:''}</textarea>
+      </div>
+    </div>`;
+  document.getElementById('modalFoot').innerHTML = `
+    <button class="btn btn-white" onclick="closeModal()">បោះបង់</button>
+    <button class="btn btn-blue" onclick="saveStaff()">💾 រក្សាទុក</button>`;
+  document.getElementById('modal').style.display='flex';
+}
+
+function pickStatus(v){
+  selStatus=v;
+  document.querySelectorAll('.status-opt').forEach(el=>{
+    el.className='status-opt';
+    if(el.textContent.includes('កំពុងធ្វើការ')&&v==='កំពុងធ្វើការ') el.classList.add('sel-active');
+    if(el.textContent.includes('ឈប់ខ្លួនឯង')&&v==='ឈប់ខ្លួនឯង') el.classList.add('sel-resigned');
+    if(el.textContent.includes('ត្រូវបញ្ឈប់')&&v==='ត្រូវបញ្ឈប់') el.classList.add('sel-terminated');
+  });
+}
+
+function saveStaff(){
+  const name  = document.getElementById('fName').value.trim();
+  const sex   = document.getElementById('fSexVal').value;
+  const dept  = document.getElementById('fDeptVal').value.trim();
+  const join  = document.getElementById('fJoin').value;
+  const leave = document.getElementById('fLeave').value;
+  const note  = document.getElementById('fNote').value.trim();
+  if(!name||!dept){ showToast('សូមបំពេញ ឈ្មោះ និង នាយកដ្ឋាន!','err'); return; }
+
+  const data={name,sex,dept,joinDate:join,leaveDate:leave,status:selStatus,note};
+  let action, subject;
+  if(editId){
+    const idx=staff.findIndex(x=>x.id===editId);
+    staff[idx]={...staff[idx],...data};
+    action='EDIT'; subject=staff[idx];
+    showToast('រក្សាទុករួចរាល់ ✓','ok');
+  } else {
+    const ns={id:nextId++,...data};
+    staff.push(ns); action='ADD'; subject=ns;
+    showToast('បន្ថែមបុគ្គលិករួចរាល់ ✓','ok');
+  }
+  closeModal(); refreshDepts(); renderStats(); applyFilter();
+  sendAutoAlert(action, subject);
+}
+
+function deleteStaff(id){
+  const s=staff.find(x=>x.id===id);
+  if(!confirm(`លុប "${s.name}" មែនទេ?`)) return;
+  const copy={...s};
+  staff=staff.filter(x=>x.id!==id);
+  showToast(`លុប ${copy.name} រួចរាល់`,'warn');
+  refreshDepts(); renderStats(); applyFilter();
+  sendAutoAlert('DELETE',copy);
+}
+
+function closeModal(){
+  document.getElementById('modal').style.display='none'; editId=null;
+}
+
+/* ═══════════════════════════════════════
+   TELEGRAM SETTINGS MODAL
+═══════════════════════════════════════ */
+function openTgModal(){
+  document.getElementById('modalTitle').textContent='✈ ការកំណត់ Telegram';
+  document.getElementById('modalBody').innerHTML=`
+    <div style="background:#eff6ff;border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:#1e40af;line-height:1.8">
+      <b>Bot Token និង Group ID បានដាក់ស្រេចហើយ ✓</b><br>
+      អ្នកអាចប្តូរបាននៅពេលណាក៏បាន
+    </div>
+    <div class="form-row">
+      <label>Bot Token</label>
+      <input id="tgTok" value="${tgCfg.token}" placeholder="123456:AAF...">
+    </div>
+    <div class="form-row">
+      <label>Group Chat ID</label>
+      <input id="tgChat" value="${tgCfg.chatId}" placeholder="-1001234567890">
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <label style="font-size:13px;font-weight:500;flex:1">បើក Auto-notification</label>
+      <input type="checkbox" id="tgEn" ${tgCfg.enabled?'checked':''} style="width:18px;height:18px;cursor:pointer">
+    </div>`;
+  document.getElementById('modalFoot').innerHTML=`
+    <button class="btn btn-white" onclick="closeModal()">បោះបង់</button>
+    <button class="btn" style="background:#fef3c7;color:#92400e;border:1px solid #fcd34d" onclick="testTg()">🧪 សាកល្បង</button>
+    <button class="btn btn-blue" onclick="saveTg()">💾 រក្សាទុក</button>`;
+  document.getElementById('modal').style.display='flex';
+}
+
+function saveTg(){
+  const tok =document.getElementById('tgTok').value.trim();
+  const chat=document.getElementById('tgChat').value.trim();
+  const en  =document.getElementById('tgEn').checked;
+  if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
+  tgCfg={token:tok,chatId:chat,enabled:en};
+  updateTgBar(); closeModal();
+  showToast('រក្សាទុករួចរាល់ ✓','ok');
+}
+
+async function testTg(){
+  const tok =document.getElementById('tgTok').value.trim();
+  const chat=document.getElementById('tgChat').value.trim();
+  if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
+  showToast('កំពុងផ្ញើ Image សាកល្បង...','info');
+  const old={...tgCfg};
+  tgCfg={token:tok,chatId:chat,enabled:true};
+  const ok=await doSendImage(buildImage(null,null));
+  tgCfg=old;
+  if(ok) showToast('ផ្ញើ Image ជោគជ័យ ✓ — មើលក្នុង Group!','ok');
+}
+
+function updateTgBar(){
+  const dot=document.getElementById('tgDot');
+  const sub=document.getElementById('tgBarSub');
+  const btn=document.getElementById('tgToggleBtn');
+  dot.className='tg-dot'+(tgCfg.enabled?'':' off');
+  sub.textContent=tgCfg.enabled
+    ?'Auto-notification បើក — ផ្ញើ Image ស្អាតដូច Excel ទៅ Group'
+    :'Auto-notification បិទ — ចុច "📊 ផ្ញើរបាយការណ៍" ដោយដៃ';
+  btn.textContent=tgCfg.enabled?'បិទ':'បើក';
+}
+
+function toggleTg(){
+  tgCfg.enabled=!tgCfg.enabled; updateTgBar();
+  showToast(tgCfg.enabled?'Notification បើករួចរាល់':'Notification បិទរួចរាល់','info');
+}
+
+/* ═══════════════════════════════════════
+   IMAGE BUILDER — Excel-style PNG
+═══════════════════════════════════════ */
+function buildImage(action, hs){
+  const DPR=2, W=920, PAD=22, RH=30, HH=36, SH=32;
+  const navy='#0f2744',blue='#1a56db',blueLt='#e8f0fe',
+        green='#0d7a4a',greenLt='#e6f7f0',
+        amber='#b45309',amberLt='#fef3c7',
+        red='#b91c1c',redLt='#fee2e2',
+        pink='#9d174d',pinkLt='#fce7f3',
+        gray='#6b7280',lightGray='#f0f2f5',border='#dde1e8',
+        white='#ffffff',text='#111827',stripe='#f9fafb';
+
+  const total=staff.length,
+        male=staff.filter(s=>s.sex==='ប្រុស').length,
+        fem=staff.filter(s=>s.sex==='ស្រី').length,
+        act=staff.filter(s=>s.status==='កំពុងធ្វើការ').length,
+        res=staff.filter(s=>s.status==='ឈប់ខ្លួនឯង').length,
+        ter=staff.filter(s=>s.status==='ត្រូវបញ្ឈប់').length;
+
+  const dm={};
+  staff.forEach(s=>{
+    const k=s.dept||'មិនកំណត់';
+    if(!dm[k]) dm[k]={t:0,m:0,f:0,a:0,r:0,d:0};
+    dm[k].t++; s.sex==='ប្រុស'?dm[k].m++:dm[k].f++;
+    if(s.status==='កំពុងធ្វើការ') dm[k].a++;
+    else if(s.status==='ឈប់ខ្លួនឯង') dm[k].r++;
+    else dm[k].d++;
+  });
+  const depts=Object.entries(dm).sort((a,b)=>b[1].t-a[1].t);
+
+  const TITLE_H=62, STAT_H=92,
+        DEPT_H=SH+HH+depts.length*RH+RH+6,
+        STAFF_H=SH+HH+Math.max(staff.length,1)*RH+6,
+        ALERT_H=hs?52:0, FOOT_H=28;
+  const H=PAD+TITLE_H+14+STAT_H+14+DEPT_H+14+STAFF_H+(ALERT_H?14+ALERT_H:0)+14+FOOT_H+PAD;
+
+  const cv=document.getElementById('cv');
+  cv.width=W*DPR; cv.height=H*DPR;
+  const ctx=cv.getContext('2d');
+  ctx.scale(DPR,DPR);
+  ctx.fillStyle=white; ctx.fillRect(0,0,W,H);
+
+  let y=PAD;
+  const F=(sz,bold=false)=>`${bold?'bold ':''}${sz}px 'Noto Sans Khmer',Arial,sans-serif`;
+  const fill=(x,yy,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,yy,w,h);};
+  const hline=(yy,c=border,lw=.5)=>{ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(PAD,yy);ctx.lineTo(W-PAD,yy);ctx.stroke();};
+  const vline=(x,yy,h,c=border)=>{ctx.strokeStyle=c;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x,yy+h);ctx.stroke();};
+  const txt=(str,x,yy,sz,color,align='left',bold=false,maxW=0)=>{
+    ctx.font=F(sz,bold);ctx.fillStyle=color;ctx.textAlign=align;
+    maxW?ctx.fillText(str,x,yy,maxW):ctx.fillText(str,x,yy);
+  };
+  const rrect=(x,yy,w,h,r,c)=>{
+    ctx.fillStyle=c;ctx.beginPath();
+    ctx.moveTo(x+r,yy);ctx.lineTo(x+w-r,yy);ctx.quadraticCurveTo(x+w,yy,x+w,yy+r);
+    ctx.lineTo(x+w,yy+h-r);ctx.quadraticCurveTo(x+w,yy+h,x+w-r,yy+h);
+    ctx.lineTo(x+r,yy+h);ctx.quadraticCurveTo(x,yy+h,x,yy+h-r);
+    ctx.lineTo(x,yy+r);ctx.quadraticCurveTo(x,yy,x+r,yy);ctx.closePath();ctx.fill();
+  };
+  const badge=(label,cx,cy,bg,fg)=>{
+    ctx.font=F(10.5);const tw=ctx.measureText(label).width;
+    const bw=tw+14,bh=17;
+    rrect(cx-bw/2,cy-13,bw,bh,8,bg);
+    txt(label,cx,cy,10.5,fg,'center');
+  };
+
+  /* TITLE */
+  fill(PAD,y,W-PAD*2,TITLE_H,navy);
+  txt('📊  របាយការណ៍គ្រប់គ្រងបុគ្គលិក',PAD+16,y+22,14,white,'left',true);
+  txt('Staff Management Report',PAD+16,y+42,11,'#90a4c8');
+  txt('🕐 '+new Date().toLocaleString('km-KH'),W-PAD-8,y+24,11,'#90a4c8','right');
+  txt('សរុប: '+total+' នាក់',W-PAD-8,y+42,11,'#7ec8e3','right');
+  y+=TITLE_H+14;
+
+  /* STAT CARDS */
+  const cards=[
+    {l:'👥 សរុប',v:total,pv:'',bg:navy,fg:white,vfg:'#7ec8e3'},
+    {l:'👨 ប្រុស',v:male,pv:pct(male,total)+'%',bg:blueLt,fg:blue,vfg:blue},
+    {l:'👩 ស្រី',v:fem,pv:pct(fem,total)+'%',bg:pinkLt,fg:pink,vfg:pink},
+    {l:'🟢 ធ្វើការ',v:act,pv:pct(act,total)+'%',bg:greenLt,fg:green,vfg:green},
+    {l:'🟡 ឈប់',v:res,pv:pct(res,total)+'%',bg:amberLt,fg:amber,vfg:amber},
+    {l:'🔴 បញ្ឈប់',v:ter,pv:pct(ter,total)+'%',bg:redLt,fg:red,vfg:red},
+  ];
+  const CW=(W-PAD*2-10*5)/6;
+  cards.forEach((c,i)=>{
+    const cx=PAD+i*(CW+10);
+    rrect(cx,y,CW,STAT_H-4,8,c.bg);
+    if(c.bg!==navy){ctx.strokeStyle=c.fg+'44';ctx.lineWidth=.5;ctx.strokeRect(cx,y,CW,STAT_H-4);}
+    txt(c.l,cx+8,y+18,10.5,c.fg,'left',false,CW-10);
+    txt(String(c.v),cx+CW/2,y+56,22,c.vfg,'center',true);
+    if(c.pv) txt(c.pv,cx+CW/2,y+74,10,c.fg,'center');
+  });
+  y+=STAT_H+14;
+
+  /* DEPT TABLE */
+  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
+  txt('🏢  ស្ថិតិតាមនាយកដ្ឋាន',PAD+12,y+SH/2+5,12,white,'left',true);
+  y+=SH;
+  const DC=[{l:'នាយកដ្ឋាន',w:170,a:'left'},{l:'សរុប',w:65,a:'center'},{l:'👨 ប្រុស',w:75,a:'center'},{l:'👩 ស្រី',w:75,a:'center'},{l:'🟢 ធ្វើការ',w:95,a:'center'},{l:'🟡 ឈប់',w:95,a:'center'},{l:'🔴 បញ្ឈប់',w:95,a:'center'}];
+  const DTW=DC.reduce((s,c)=>s+c.w,0);
+  const DX=PAD+(W-PAD*2-DTW)/2;
+  let cx=DX;
+  DC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
+  hline(y,blue); hline(y+HH,blue); y+=HH;
+  if(depts.length===0){
+    fill(DX,y,DTW,RH,stripe);
+    txt('មិនទាន់មានទិន្នន័យ',DX+DTW/2,y+RH/2+5,12,gray,'center');
+    hline(y+RH); y+=RH;
+  } else {
+    depts.forEach(([dept,d],idx)=>{
+      const bg=idx%2===0?white:stripe;
+      cx=DX; fill(DX,y,DTW,RH,bg);
+      const vals=[dept,d.t,d.m,d.f,d.a,d.r,d.d];
+      DC.forEach((c,i)=>{txt(String(vals[i]),cx+(c.a==='center'?c.w/2:8),y+RH/2+5,12,i===0?text:gray,c.a,i===0,c.w-6);vline(cx,y,RH);cx+=c.w;});
+      hline(y+RH); y+=RH;
+    });
+    fill(DX,y,DTW,RH,'#dbeafe');
+    cx=DX;
+    const tv=['សរុប',total,male,fem,act,res,ter];
+    DC.forEach((c,i)=>{txt(String(tv[i]),cx+(c.a==='center'?c.w/2:8),y+RH/2+5,12,navy,c.a,true,c.w-6);vline(cx,y,RH,navy+'55');cx+=c.w;});
+    hline(y,navy+'44'); hline(y+RH,navy+'44');
+    ctx.strokeStyle=navy+'33';ctx.lineWidth=1;ctx.strokeRect(DX,y-depts.length*RH-HH,DTW,depts.length*RH+HH+RH);
+    y+=RH;
+  }
+  y+=14;
+
+  /* STAFF LIST */
+  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
+  txt('📝  បញ្ជីបុគ្គលិកទាំងអស់',PAD+12,y+SH/2+5,12,white,'left',true);
+  y+=SH;
+  const SC=[{l:'#',w:36,a:'center'},{l:'ឈ្មោះ',w:180,a:'left'},{l:'ភេទ',w:72,a:'center'},{l:'នាយកដ្ឋាន',w:130,a:'left'},{l:'ចូលធ្វើការ',w:105,a:'center'},{l:'ស្ថានភាព',w:130,a:'center'},{l:'ថ្ងៃឈប់',w:105,a:'center'}];
+  const STW=SC.reduce((s,c)=>s+c.w,0);
+  const SX=PAD+(W-PAD*2-STW)/2;
+  cx=SX;
+  SC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
+  hline(y,blue); hline(y+HH,blue); y+=HH;
+
+  if(staff.length===0){
+    fill(SX,y,STW,RH,stripe);
+    txt('មិនទាន់មានបុគ្គលិក',SX+STW/2,y+RH/2+5,12,gray,'center');
+    hline(y+RH); y+=RH;
+  } else {
+    staff.forEach((s2,idx)=>{
+      const isHL=hs&&s2.id===hs.id;
+      const bg=isHL?'#fefce8':idx%2===0?white:stripe;
+      const stBg=s2.status==='កំពុងធ្វើការ'?greenLt:s2.status==='ឈប់ខ្លួនឯង'?amberLt:redLt;
+      const stFg=s2.status==='កំពុងធ្វើការ'?green:s2.status==='ឈប់ខ្លួនឯង'?amber:red;
+      const sxBg=s2.sex==='ប្រុស'?blueLt:pinkLt;
+      const sxFg=s2.sex==='ប្រុស'?blue:pink;
+      cx=SX; fill(SX,y,STW,RH,bg);
+      SC.forEach((c,i)=>{
+        const midX=cx+c.w/2, midY=y+RH/2+5;
+        if(i===2) badge(s2.sex,midX,midY,sxBg,sxFg);
+        else if(i===5) badge(s2.status,midX,midY,stBg,stFg);
+        else {
+          const v=[String(idx+1),s2.name,'',s2.dept||'—',s2.joinDate||'—','',s2.leaveDate||'—'][i];
+          txt(v,c.a==='center'?midX:cx+8,midY,12,i===1?text:gray,c.a,i===1,c.w-8);
+        }
+        vline(cx,y,RH); cx+=c.w;
+      });
+      hline(y+RH); y+=RH;
+    });
+    ctx.strokeStyle=border;ctx.lineWidth=1;ctx.strokeRect(SX,y-staff.length*RH-HH,STW,staff.length*RH+HH);
+  }
+
+  /* ALERT */
+  if(hs&&action){
+    y+=14;
+    const aBg=action==='ADD'?greenLt:action==='EDIT'?amberLt:redLt;
+    const aFg=action==='ADD'?green:action==='EDIT'?amber:red;
+    const aLbl=action==='ADD'?'✅ បន្ថែមថ្មី — ':action==='EDIT'?'✏️ បានកែប្រែ — ':'🗑️ បានលុប — ';
+    rrect(PAD,y,W-PAD*2,ALERT_H,8,aBg);
+    ctx.strokeStyle=aFg+'55';ctx.lineWidth=.5;ctx.strokeRect(PAD,y,W-PAD*2,ALERT_H);
+    txt(aLbl+hs.name,PAD+14,y+17,12,aFg,'left',true);
+    txt((hs.dept||'')+(hs.joinDate?' | ចូល: '+hs.joinDate:'')+(hs.leaveDate?' | ឈប់: '+hs.leaveDate:'')+'  | '+hs.status,PAD+14,y+35,11,aFg);
+    y+=ALERT_H;
+  }
+
+  /* FOOTER */
+  y+=14; hline(y,lightGray);
+  txt('ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក — Staff Management System',PAD,y+18,10,gray);
+  txt('Generated: '+new Date().toLocaleString(),W-PAD,y+18,10,gray,'right');
+  return cv.toDataURL('image/png');
+}
+
+/* ═══════════════════════════════════════
+   SEND TO TELEGRAM
+═══════════════════════════════════════ */
+async function doSendImage(dataUrl){
+  if(!tgCfg.token||!tgCfg.chatId) return false;
+  try{
+    const blob=(await fetch(dataUrl)).blob?await(await fetch(dataUrl)).blob():null;
+    if(!blob) return false;
+    const fd=new FormData();
+    fd.append('chat_id',tgCfg.chatId);
+    fd.append('photo',blob,'report.png');
+    fd.append('caption','📊 របាយការណ៍គ្រប់គ្រងបុគ្គលិក\n🕐 '+new Date().toLocaleString('km-KH'));
+    fd.append('parse_mode','HTML');
+    const r=await fetch(`https://api.telegram.org/bot${tgCfg.token}/sendPhoto`,{method:'POST',body:fd});
+    const d=await r.json();
+    if(!d.ok){showToast('Telegram: '+d.description,'err');return false;}
+    return true;
+  }catch(e){showToast('Error: '+e.message,'err');return false;}
+}
+
+async function sendAutoAlert(action,s){
+  if(!tgCfg.enabled||!tgCfg.token||!tgCfg.chatId) return;
+  showToast('កំពុងផ្ញើ Telegram...','info');
+  const ok=await doSendImage(buildImage(action,s));
+  if(ok) showToast('Telegram ✓','ok');
+}
+
+async function sendReport(){
+  if(!tgCfg.token||!tgCfg.chatId){showToast('សូមកំណត់ Telegram ជាមុន!','err');return;}
+  showToast('កំពុងបង្កើត Image...','info');
+  const ok=await doSendImage(buildImage(null,null));
+  if(ok) showToast('ផ្ញើរបាយការណ៍ជោគជ័យ ✓','ok');
+}
+
+/* ═══════════════════════════════════════
+   EXPORT CSV
+═══════════════════════════════════════ */
+function exportCSV(){
+  const h=['#','ឈ្មោះ','ភេទ','នាយកដ្ឋាន','ចូលធ្វើការ','ស្ថានភាព','ថ្ងៃឈប់','កំណត់ចំណាំ'];
+  const rows=staff.map((s,i)=>[i+1,s.name,s.sex,s.dept||'',s.joinDate||'',s.status,s.leaveDate||'',s.note||'']);
+  const csv=[h,...rows].map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
+  a.download='staff.csv'; a.click();
+  showToast('Export CSV ✓','ok');
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+updateTgBar();
+renderStats();
+refreshDepts();
+applyFilter();
+</script>
+</body>
+</html>
