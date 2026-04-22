@@ -6,7 +6,7 @@
 <title>គ្រប់គ្រងបុគ្គលិក</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --navy:#0f2744;--blue:#1a56db;--blue-lt:#e8f0fe;
   --green:#0d7a4a;--green-lt:#e6f7f0;
   --amber:#b45309;--amber-lt:#fef3c7;
@@ -29,8 +29,8 @@ body{font-family:'Noto Sans Khmer',sans-serif;background:var(--bg);color:var(--t
 .btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#0a6340}
 .btn-sm{padding:5px 10px;font-size:12px;border-radius:6px}
 .btn-icon{padding:5px 8px;border-radius:6px;background:transparent;border:1px solid transparent;cursor:pointer;font-size:15px;transition:background .12s}.btn-icon:hover{background:#f0f2f5}
-.page{max-width:1100px;margin:0 auto;padding:20px 16px}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.page{max-width:1120px;margin:0 auto;padding:20px 16px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:20px}
 .stat-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;box-shadow:var(--shadow)}
 .stat-card .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
 .stat-card .val{font-size:28px;font-weight:700;line-height:1}
@@ -48,7 +48,7 @@ select.filter{padding:8px 10px;border:1px solid var(--border);border-radius:8px;
 select.filter:focus{border-color:var(--blue)}
 table{width:100%;border-collapse:collapse;font-size:13px}
 thead th{padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);background:#f9fafb;white-space:nowrap}
-tbody td{padding:11px 14px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+tbody td{padding:10px 14px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:#f7f9ff}
 .name-cell{font-weight:500}
@@ -91,13 +91,13 @@ tbody tr:hover td{background:#f7f9ff}
 .sel-active{border-color:var(--green)!important;background:var(--green-lt)!important;color:var(--green)!important}
 .sel-resigned{border-color:var(--amber)!important;background:var(--amber-lt)!important;color:var(--amber)!important}
 .sel-terminated{border-color:var(--red)!important;background:var(--red-lt)!important;color:var(--red)!important}
-.tg-bar{background:linear-gradient(135deg,#1a3a6e 0%,#0f2744 100%);border-radius:var(--radius);padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tg-bar{background:linear-gradient(135deg,#1a3a6e,#0f2744);border-radius:var(--radius);padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .tg-bar-text{flex:1;min-width:160px}
 .tg-bar-text strong{font-size:13px;color:#fff;display:block}
 .tg-bar-text span{font-size:11px;color:#90a4c8}
 .tg-dot{width:8px;height:8px;border-radius:50%;background:#10b981;flex-shrink:0;box-shadow:0 0 6px #10b981;animation:pulse 2s infinite}
 .tg-dot.off{background:#ef4444;box-shadow:0 0 6px #ef4444;animation:none}
-@keyframes pulse{0%,100%{box-shadow:0 0 6px #10b981}50%{box-shadow:0 0 12px #10b981}}
+@keyframes pulse{0%,100%{box-shadow:0 0 6px #10b981}50%{box-shadow:0 0 14px #10b981}}
 .toast{position:fixed;bottom:24px;right:24px;background:#111;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:320px}
 .toast.show{opacity:1;transform:translateY(0)}
 #cv{position:absolute;left:-9999px;top:-9999px}
@@ -118,7 +118,7 @@ tbody tr:hover td{background:#f7f9ff}
 </div>
 
 <div class="page">
-  <!-- TG STATUS BAR -->
+
   <div class="tg-bar" id="tgBar">
     <div class="tg-dot" id="tgDot"></div>
     <div class="tg-bar-text">
@@ -129,10 +129,8 @@ tbody tr:hover td{background:#f7f9ff}
     <button class="btn btn-sm" onclick="openTgModal()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">⚙ កំណត់</button>
   </div>
 
-  <!-- STATS -->
   <div class="stat-grid" id="stats"></div>
 
-  <!-- TABLE -->
   <div class="main-card">
     <div class="card-header">
       <div class="card-header-left">
@@ -169,7 +167,7 @@ tbody tr:hover td{background:#f7f9ff}
             <th>ចូលធ្វើការ</th>
             <th>ស្ថានភាព</th>
             <th>ថ្ងៃឈប់</th>
-            <th style="width:170px">ប្តូរស្ថានភាព</th>
+            <th style="width:180px">ប្តូរស្ថានភាព</th>
             <th style="width:80px">សកម្មភាព</th>
           </tr>
         </thead>
@@ -177,7 +175,7 @@ tbody tr:hover td{background:#f7f9ff}
       </table>
       <div id="emptyState" class="empty" style="display:none">
         <div class="empty-icon">📋</div>
-        <div>មិនទាន់មានបុគ្គលិក — ចុច "＋ បន្ថែម" ដើម្បីដាក់ឈ្មោះ</div>
+        <div>មិនមានបុគ្គលិកក្នុងបញ្ជី</div>
       </div>
     </div>
 
@@ -190,7 +188,6 @@ tbody tr:hover td{background:#f7f9ff}
 
 <canvas id="cv"></canvas>
 
-<!-- MODAL -->
 <div class="modal-mask" id="modal" style="display:none" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <div class="modal-head">
@@ -205,51 +202,64 @@ tbody tr:hover td{background:#f7f9ff}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════════════════════════════════
-   TELEGRAM — pre-configured
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════
+   TELEGRAM CONFIG
+═══════════════════════════════════ */
 let tgCfg = {
   token:   '8253508040:AAHqbIxWCBTHGHv-9oLRQXAT2hqWJE6U3wY',
   chatId:  '-1003938048448',
   enabled: true
 };
 
-/* ═══════════════════════════════════════
-   STATE
-═══════════════════════════════════════ */
-let staff = [];
-let nextId = 1;
-let filtered = [];
-let page = 1;
-const PER = 10;
-let editId = null;
-let selStatus = 'កំពុងធ្វើការ';
+/* ═══════════════════════════════════
+   STAFF DATA — 17 បុគ្គលិក
+═══════════════════════════════════ */
+let staff = [
+  {id:1,  name:'Desha Bushell',        sex:'ស្រី',  dept:'English Teacher',     joinDate:'2026-03-23', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:2,  name:'Ly Mary',              sex:'ស្រី',  dept:'English Teacher',     joinDate:'2026-03-12', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:3,  name:'Kosal Seakmeng',       sex:'ស្រី',  dept:'Assistance Teacher',  joinDate:'2026-02-05', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:4,  name:'Chhoeurn Chanthoeurn', sex:'ស្រី',  dept:'IT',                  joinDate:'2026-01-19', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:5,  name:'Vin Serypheap',        sex:'ស្រី',  dept:'Assistance Teacher',  joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:6,  name:'Ashley Villela',       sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:7,  name:'Chamnan Veasna',       sex:'ប្រុស', dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:8,  name:'Chot Horn',            sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:9,  name:'Sok Sreypich',         sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:10, name:'Dorn Sreyneth',        sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:11, name:'Leang Sopheavy',       sex:'ស្រី',  dept:'IT',                  joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:12, name:'Vat Mouysaing',        sex:'ស្រី',  dept:'Chinese Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:13, name:'Born Chhorda',         sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:14, name:'Chemvan Lyhorng',      sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:15, name:'Eng Sreynin',          sex:'ស្រី',  dept:'Receptionist',        joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:16, name:'Oeun Kanal',           sex:'ប្រុស', dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+  {id:17, name:'Moeung Sreynith',      sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+];
+let nextId = 18;
+let filtered = [], page = 1, editId = null, selStatus = 'កំពុងធ្វើការ';
+const PER = 20;
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    TOAST
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 let toastTimer;
 function showToast(msg, type='info'){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.background = type==='ok'?'#065f46':type==='err'?'#7f1d1d':type==='warn'?'#78350f':'#1e3a5f';
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 3200);
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=type==='ok'?'#065f46':type==='err'?'#7f1d1d':type==='warn'?'#78350f':'#1e3a5f';
+  t.classList.add('show'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    STATS
-═══════════════════════════════════════ */
-function pct(n,t){ return t ? Math.round(n/t*100) : 0; }
-
+═══════════════════════════════════ */
+function pct(n,t){return t?Math.round(n/t*100):0;}
 function renderStats(){
   const t=staff.length, m=staff.filter(s=>s.sex==='ប្រុស').length,
         f=staff.filter(s=>s.sex==='ស្រី').length,
         a=staff.filter(s=>s.status==='កំពុងធ្វើការ').length,
         r=staff.filter(s=>s.status==='ឈប់ខ្លួនឯង').length,
         d=staff.filter(s=>s.status==='ត្រូវបញ្ឈប់').length;
-  document.getElementById('stats').innerHTML = `
+  document.getElementById('stats').innerHTML=`
     <div class="stat-card"><div class="lbl">👥 សរុបទាំងអស់</div><div class="val c-navy">${t}</div><div class="sub">នាក់</div></div>
     <div class="stat-card"><div class="lbl">👨 ប្រុស</div><div class="val c-blue">${m}</div><div class="sub">${pct(m,t)}% នៃសរុប</div></div>
     <div class="stat-card"><div class="lbl">👩 ស្រី</div><div class="val c-pink">${f}</div><div class="sub">${pct(f,t)}% នៃសរុប</div></div>
@@ -258,48 +268,41 @@ function renderStats(){
     <div class="stat-card"><div class="lbl">🔴 ត្រូវបញ្ឈប់</div><div class="val c-red">${d}</div><div class="sub">${pct(d,t)}%</div></div>`;
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    DEPT FILTER
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 function refreshDepts(){
-  const depts = [...new Set(staff.map(s=>s.dept).filter(Boolean))].sort();
-  const sel = document.getElementById('fDept');
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">នាយកដ្ឋានទាំងអស់</option>'
-    + depts.map(d=>`<option value="${d}" ${d===cur?'selected':''}>${d}</option>`).join('');
+  const depts=[...new Set(staff.map(s=>s.dept).filter(Boolean))].sort();
+  const sel=document.getElementById('fDept'), cur=sel.value;
+  sel.innerHTML='<option value="">នាយកដ្ឋានទាំងអស់</option>'
+    +depts.map(d=>`<option value="${d}" ${d===cur?'selected':''}>${d}</option>`).join('');
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    FILTER & TABLE
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 function applyFilter(){
-  const q      = document.getElementById('searchInput').value.toLowerCase();
-  const sex    = document.getElementById('fSex').value;
-  const status = document.getElementById('fStatus').value;
-  const dept   = document.getElementById('fDept').value;
-  filtered = staff.filter(s=>
-    (!q || s.name.toLowerCase().includes(q) || (s.dept||'').toLowerCase().includes(q)) &&
-    (!sex    || s.sex===sex) &&
-    (!status || s.status===status) &&
-    (!dept   || s.dept===dept)
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const sex=document.getElementById('fSex').value;
+  const status=document.getElementById('fStatus').value;
+  const dept=document.getElementById('fDept').value;
+  filtered=staff.filter(s=>
+    (!q||s.name.toLowerCase().includes(q)||(s.dept||'').toLowerCase().includes(q))&&
+    (!sex||s.sex===sex)&&(!status||s.status===status)&&(!dept||s.dept===dept)
   );
-  page = 1; renderTable();
+  page=1; renderTable();
 }
 
 function renderTable(){
-  const total = filtered.length;
-  const pages = Math.max(1, Math.ceil(total/PER));
+  const total=filtered.length, pages=Math.max(1,Math.ceil(total/PER));
   if(page>pages) page=pages;
-  const start = (page-1)*PER;
-  const rows  = filtered.slice(start, start+PER);
-  const tbody = document.getElementById('tbody');
-  const empty = document.getElementById('emptyState');
-
-  if(!rows.length){ tbody.innerHTML=''; empty.style.display='block'; }
-  else {
+  const start=(page-1)*PER, rows=filtered.slice(start,start+PER);
+  const tbody=document.getElementById('tbody'), empty=document.getElementById('emptyState');
+  if(!rows.length){tbody.innerHTML='';empty.style.display='block';}
+  else{
     empty.style.display='none';
-    tbody.innerHTML = rows.map((s,i)=>{
-      const sb = s.status==='កំពុងធ្វើការ'?'badge-active':s.status==='ឈប់ខ្លួនឯង'?'badge-resigned':'badge-terminated';
+    tbody.innerHTML=rows.map((s,i)=>{
+      const sb=s.status==='កំពុងធ្វើការ'?'badge-active':s.status==='ឈប់ខ្លួនឯង'?'badge-resigned':'badge-terminated';
       return `<tr>
         <td style="color:#9ca3af;font-size:12px">${start+i+1}</td>
         <td><div class="name-cell">${s.name}</div></td>
@@ -320,10 +323,8 @@ function renderTable(){
       </tr>`;
     }).join('');
   }
-
-  document.getElementById('pageInfo').textContent =
+  document.getElementById('pageInfo').textContent=
     total===0?'មិនមានទិន្នន័យ':`បង្ហាញ ${start+1}–${Math.min(start+PER,total)} នៃ ${total} នាក់`;
-
   let btns=`<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>‹</button>`;
   for(let p=1;p<=pages;p++){
     if(pages<=7||p===1||p===pages||Math.abs(p-page)<=1)
@@ -331,39 +332,32 @@ function renderTable(){
     else if(Math.abs(p-page)===2) btns+=`<span style="padding:4px;color:#9ca3af">…</span>`;
   }
   btns+=`<button class="pg-btn" onclick="goPage(${page+1})" ${page===pages?'disabled':''}>›</button>`;
-  document.getElementById('pgBtns').innerHTML = btns;
+  document.getElementById('pgBtns').innerHTML=btns;
 }
+function goPage(p){const pages=Math.ceil(filtered.length/PER);if(p<1||p>pages)return;page=p;renderTable();}
 
-function goPage(p){
-  const pages=Math.ceil(filtered.length/PER);
-  if(p<1||p>pages) return;
-  page=p; renderTable();
-}
-
-/* ═══════════════════════════════════════
-   SET STATUS (quick pills)
-═══════════════════════════════════════ */
-function setStatus(id, status){
-  const s = staff.find(x=>x.id===id);
-  s.status = status;
-  if(status!=='កំពុងធ្វើការ' && !s.leaveDate)
-    s.leaveDate = new Date().toISOString().slice(0,10);
+/* ═══════════════════════════════════
+   SET STATUS
+═══════════════════════════════════ */
+function setStatus(id,status){
+  const s=staff.find(x=>x.id===id);
+  s.status=status;
+  if(status!=='កំពុងធ្វើការ'&&!s.leaveDate) s.leaveDate=new Date().toISOString().slice(0,10);
   if(status==='កំពុងធ្វើការ') s.leaveDate='';
   renderStats(); applyFilter();
   showToast(`${s.name} → ${status}`,'ok');
-  sendAutoAlert('EDIT', s);
+  sendAutoAlert('EDIT',s);
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    FORM MODAL
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 function openForm(id){
-  editId = id||null;
-  const s = id ? staff.find(x=>x.id===id) : null;
-  selStatus = s ? s.status : 'កំពុងធ្វើការ';
-
-  document.getElementById('modalTitle').textContent = s?'កែប្រែបុគ្គលិក':'បន្ថែមបុគ្គលិកថ្មី';
-  document.getElementById('modalBody').innerHTML = `
+  editId=id||null;
+  const s=id?staff.find(x=>x.id===id):null;
+  selStatus=s?s.status:'កំពុងធ្វើការ';
+  document.getElementById('modalTitle').textContent=s?'កែប្រែបុគ្គលិក':'បន្ថែមបុគ្គលិកថ្មី';
+  document.getElementById('modalBody').innerHTML=`
     <div class="form-grid">
       <div class="form-row form-full">
         <label>ឈ្មោះពេញ *</label>
@@ -378,7 +372,10 @@ function openForm(id){
       </div>
       <div class="form-row">
         <label>នាយកដ្ឋាន *</label>
-        <input id="fDeptVal" value="${s?s.dept:''}" placeholder="ឈ្មោះនាយកដ្ឋាន...">
+        <input id="fDeptVal" value="${s?s.dept:''}" list="deptList" placeholder="ឈ្មោះ...">
+        <datalist id="deptList">
+          ${[...new Set(staff.map(x=>x.dept).filter(Boolean))].sort().map(d=>`<option value="${d}">`).join('')}
+        </datalist>
       </div>
       <div class="form-row">
         <label>ចូលធ្វើការ <span class="opt-tag">(មិនចាំបាច់)</span></label>
@@ -401,7 +398,7 @@ function openForm(id){
         <textarea id="fNote" placeholder="...">${s?s.note:''}</textarea>
       </div>
     </div>`;
-  document.getElementById('modalFoot').innerHTML = `
+  document.getElementById('modalFoot').innerHTML=`
     <button class="btn btn-white" onclick="closeModal()">បោះបង់</button>
     <button class="btn btn-blue" onclick="saveStaff()">💾 រក្សាទុក</button>`;
   document.getElementById('modal').style.display='flex';
@@ -418,28 +415,25 @@ function pickStatus(v){
 }
 
 function saveStaff(){
-  const name  = document.getElementById('fName').value.trim();
-  const sex   = document.getElementById('fSexVal').value;
-  const dept  = document.getElementById('fDeptVal').value.trim();
-  const join  = document.getElementById('fJoin').value;
-  const leave = document.getElementById('fLeave').value;
-  const note  = document.getElementById('fNote').value.trim();
-  if(!name||!dept){ showToast('សូមបំពេញ ឈ្មោះ និង នាយកដ្ឋាន!','err'); return; }
-
+  const name=document.getElementById('fName').value.trim();
+  const sex=document.getElementById('fSexVal').value;
+  const dept=document.getElementById('fDeptVal').value.trim();
+  const join=document.getElementById('fJoin').value;
+  const leave=document.getElementById('fLeave').value;
+  const note=document.getElementById('fNote').value.trim();
+  if(!name||!dept){showToast('សូមបំពេញ ឈ្មោះ និង នាយកដ្ឋាន!','err');return;}
   const data={name,sex,dept,joinDate:join,leaveDate:leave,status:selStatus,note};
-  let action, subject;
+  let action,subject;
   if(editId){
     const idx=staff.findIndex(x=>x.id===editId);
-    staff[idx]={...staff[idx],...data};
-    action='EDIT'; subject=staff[idx];
+    staff[idx]={...staff[idx],...data}; action='EDIT'; subject=staff[idx];
     showToast('រក្សាទុករួចរាល់ ✓','ok');
   } else {
-    const ns={id:nextId++,...data};
-    staff.push(ns); action='ADD'; subject=ns;
+    const ns={id:nextId++,...data}; staff.push(ns); action='ADD'; subject=ns;
     showToast('បន្ថែមបុគ្គលិករួចរាល់ ✓','ok');
   }
   closeModal(); refreshDepts(); renderStats(); applyFilter();
-  sendAutoAlert(action, subject);
+  sendAutoAlert(action,subject);
 }
 
 function deleteStaff(id){
@@ -452,27 +446,25 @@ function deleteStaff(id){
   sendAutoAlert('DELETE',copy);
 }
 
-function closeModal(){
-  document.getElementById('modal').style.display='none'; editId=null;
-}
+function closeModal(){document.getElementById('modal').style.display='none';editId=null;}
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    TELEGRAM SETTINGS MODAL
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 function openTgModal(){
   document.getElementById('modalTitle').textContent='✈ ការកំណត់ Telegram';
   document.getElementById('modalBody').innerHTML=`
     <div style="background:#eff6ff;border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:#1e40af;line-height:1.8">
-      <b>Bot Token និង Group ID បានដាក់ស្រេចហើយ ✓</b><br>
+      Token និង Group ID បានដាក់ស្រេចហើយ ✓<br>
       អ្នកអាចប្តូរបាននៅពេលណាក៏បាន
     </div>
     <div class="form-row">
       <label>Bot Token</label>
-      <input id="tgTok" value="${tgCfg.token}" placeholder="123456:AAF...">
+      <input id="tgTok" value="${tgCfg.token}">
     </div>
     <div class="form-row">
       <label>Group Chat ID</label>
-      <input id="tgChat" value="${tgCfg.chatId}" placeholder="-1001234567890">
+      <input id="tgChat" value="${tgCfg.chatId}">
     </div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
       <label style="font-size:13px;font-weight:500;flex:1">បើក Auto-notification</label>
@@ -486,36 +478,30 @@ function openTgModal(){
 }
 
 function saveTg(){
-  const tok =document.getElementById('tgTok').value.trim();
+  const tok=document.getElementById('tgTok').value.trim();
   const chat=document.getElementById('tgChat').value.trim();
-  const en  =document.getElementById('tgEn').checked;
+  const en=document.getElementById('tgEn').checked;
   if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
   tgCfg={token:tok,chatId:chat,enabled:en};
-  updateTgBar(); closeModal();
-  showToast('រក្សាទុករួចរាល់ ✓','ok');
+  updateTgBar(); closeModal(); showToast('រក្សាទុករួចរាល់ ✓','ok');
 }
 
 async function testTg(){
-  const tok =document.getElementById('tgTok').value.trim();
+  const tok=document.getElementById('tgTok').value.trim();
   const chat=document.getElementById('tgChat').value.trim();
   if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
   showToast('កំពុងផ្ញើ Image សាកល្បង...','info');
-  const old={...tgCfg};
-  tgCfg={token:tok,chatId:chat,enabled:true};
-  const ok=await doSendImage(buildImage(null,null));
-  tgCfg=old;
-  if(ok) showToast('ផ្ញើ Image ជោគជ័យ ✓ — មើលក្នុង Group!','ok');
+  const old={...tgCfg}; tgCfg={token:tok,chatId:chat,enabled:true};
+  const ok=await doSendImage(buildImage(null,null)); tgCfg=old;
+  if(ok) showToast('ផ្ញើ Image ជោគជ័យ ✓','ok');
 }
 
 function updateTgBar(){
-  const dot=document.getElementById('tgDot');
-  const sub=document.getElementById('tgBarSub');
-  const btn=document.getElementById('tgToggleBtn');
-  dot.className='tg-dot'+(tgCfg.enabled?'':' off');
-  sub.textContent=tgCfg.enabled
+  document.getElementById('tgDot').className='tg-dot'+(tgCfg.enabled?'':' off');
+  document.getElementById('tgBarSub').textContent=tgCfg.enabled
     ?'Auto-notification បើក — ផ្ញើ Image ស្អាតដូច Excel ទៅ Group'
     :'Auto-notification បិទ — ចុច "📊 ផ្ញើរបាយការណ៍" ដោយដៃ';
-  btn.textContent=tgCfg.enabled?'បិទ':'បើក';
+  document.getElementById('tgToggleBtn').textContent=tgCfg.enabled?'បិទ':'បើក';
 }
 
 function toggleTg(){
@@ -523,18 +509,18 @@ function toggleTg(){
   showToast(tgCfg.enabled?'Notification បើករួចរាល់':'Notification បិទរួចរាល់','info');
 }
 
-/* ═══════════════════════════════════════
-   IMAGE BUILDER — Excel-style PNG
-═══════════════════════════════════════ */
-function buildImage(action, hs){
-  const DPR=2, W=920, PAD=22, RH=30, HH=36, SH=32;
+/* ═══════════════════════════════════
+   IMAGE BUILDER
+═══════════════════════════════════ */
+function buildImage(action,hs){
+  const DPR=2,W=940,PAD=22,RH=30,HH=36,SH=32;
   const navy='#0f2744',blue='#1a56db',blueLt='#e8f0fe',
         green='#0d7a4a',greenLt='#e6f7f0',
         amber='#b45309',amberLt='#fef3c7',
         red='#b91c1c',redLt='#fee2e2',
         pink='#9d174d',pinkLt='#fce7f3',
         gray='#6b7280',lightGray='#f0f2f5',border='#dde1e8',
-        white='#ffffff',text='#111827',stripe='#f9fafb';
+        white='#ffffff',textC='#111827',stripe='#f9fafb';
 
   const total=staff.length,
         male=staff.filter(s=>s.sex==='ប្រុស').length,
@@ -554,10 +540,10 @@ function buildImage(action, hs){
   });
   const depts=Object.entries(dm).sort((a,b)=>b[1].t-a[1].t);
 
-  const TITLE_H=62, STAT_H=92,
+  const TITLE_H=62,STAT_H=92,
         DEPT_H=SH+HH+depts.length*RH+RH+6,
         STAFF_H=SH+HH+Math.max(staff.length,1)*RH+6,
-        ALERT_H=hs?52:0, FOOT_H=28;
+        ALERT_H=hs?52:0,FOOT_H=28;
   const H=PAD+TITLE_H+14+STAT_H+14+DEPT_H+14+STAFF_H+(ALERT_H?14+ALERT_H:0)+14+FOOT_H+PAD;
 
   const cv=document.getElementById('cv');
@@ -584,8 +570,7 @@ function buildImage(action, hs){
   };
   const badge=(label,cx,cy,bg,fg)=>{
     ctx.font=F(10.5);const tw=ctx.measureText(label).width;
-    const bw=tw+14,bh=17;
-    rrect(cx-bw/2,cy-13,bw,bh,8,bg);
+    rrect(cx-tw/2-7,cy-13,tw+14,17,8,bg);
     txt(label,cx,cy,10.5,fg,'center');
   };
 
@@ -621,72 +606,63 @@ function buildImage(action, hs){
   fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
   txt('🏢  ស្ថិតិតាមនាយកដ្ឋាន',PAD+12,y+SH/2+5,12,white,'left',true);
   y+=SH;
-  const DC=[{l:'នាយកដ្ឋាន',w:170,a:'left'},{l:'សរុប',w:65,a:'center'},{l:'👨 ប្រុស',w:75,a:'center'},{l:'👩 ស្រី',w:75,a:'center'},{l:'🟢 ធ្វើការ',w:95,a:'center'},{l:'🟡 ឈប់',w:95,a:'center'},{l:'🔴 បញ្ឈប់',w:95,a:'center'}];
+  const DC=[{l:'នាយកដ្ឋាន',w:185,a:'left'},{l:'សរុប',w:65,a:'center'},{l:'👨 ប្រុស',w:75,a:'center'},{l:'👩 ស្រី',w:75,a:'center'},{l:'🟢 ធ្វើការ',w:95,a:'center'},{l:'🟡 ឈប់',w:90,a:'center'},{l:'🔴 បញ្ឈប់',w:90,a:'center'}];
   const DTW=DC.reduce((s,c)=>s+c.w,0);
   const DX=PAD+(W-PAD*2-DTW)/2;
   let cx=DX;
-  DC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
-  hline(y,blue); hline(y+HH,blue); y+=HH;
-  if(depts.length===0){
-    fill(DX,y,DTW,RH,stripe);
-    txt('មិនទាន់មានទិន្នន័យ',DX+DTW/2,y+RH/2+5,12,gray,'center');
-    hline(y+RH); y+=RH;
-  } else {
-    depts.forEach(([dept,d],idx)=>{
-      const bg=idx%2===0?white:stripe;
-      cx=DX; fill(DX,y,DTW,RH,bg);
-      const vals=[dept,d.t,d.m,d.f,d.a,d.r,d.d];
-      DC.forEach((c,i)=>{txt(String(vals[i]),cx+(c.a==='center'?c.w/2:8),y+RH/2+5,12,i===0?text:gray,c.a,i===0,c.w-6);vline(cx,y,RH);cx+=c.w;});
-      hline(y+RH); y+=RH;
+  DC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:10),y+HH/2+5,11,white,c.a,true,c.w-8);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
+  hline(y,blue);hline(y+HH,blue);y+=HH;
+  depts.forEach(([dept,d],idx)=>{
+    const bg=idx%2===0?white:stripe; cx=DX;
+    fill(DX,y,DTW,RH,bg);
+    [dept,d.t,d.m,d.f,d.a,d.r,d.d].forEach((v,i)=>{
+      txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,i===0?textC:gray,DC[i].a,i===0,DC[i].w-8);
+      vline(cx,y,RH); cx+=DC[i].w;
     });
-    fill(DX,y,DTW,RH,'#dbeafe');
-    cx=DX;
-    const tv=['សរុប',total,male,fem,act,res,ter];
-    DC.forEach((c,i)=>{txt(String(tv[i]),cx+(c.a==='center'?c.w/2:8),y+RH/2+5,12,navy,c.a,true,c.w-6);vline(cx,y,RH,navy+'55');cx+=c.w;});
-    hline(y,navy+'44'); hline(y+RH,navy+'44');
-    ctx.strokeStyle=navy+'33';ctx.lineWidth=1;ctx.strokeRect(DX,y-depts.length*RH-HH,DTW,depts.length*RH+HH+RH);
-    y+=RH;
-  }
-  y+=14;
+    hline(y+RH); y+=RH;
+  });
+  // total row
+  fill(DX,y,DTW,RH,'#dbeafe'); cx=DX;
+  ['សរុប',total,male,fem,act,res,ter].forEach((v,i)=>{
+    txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,navy,DC[i].a,true,DC[i].w-8);
+    vline(cx,y,RH,navy+'55'); cx+=DC[i].w;
+  });
+  hline(y,navy+'44');hline(y+RH,navy+'44');
+  ctx.strokeStyle=navy+'33';ctx.lineWidth=1;ctx.strokeRect(DX,y-depts.length*RH-HH,DTW,depts.length*RH+HH+RH);
+  y+=RH+14;
 
   /* STAFF LIST */
   fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
-  txt('📝  បញ្ជីបុគ្គលិកទាំងអស់',PAD+12,y+SH/2+5,12,white,'left',true);
+  txt('📝  បញ្ជីបុគ្គលិកទាំងអស់  ('+staff.length+' នាក់)',PAD+12,y+SH/2+5,12,white,'left',true);
   y+=SH;
-  const SC=[{l:'#',w:36,a:'center'},{l:'ឈ្មោះ',w:180,a:'left'},{l:'ភេទ',w:72,a:'center'},{l:'នាយកដ្ឋាន',w:130,a:'left'},{l:'ចូលធ្វើការ',w:105,a:'center'},{l:'ស្ថានភាព',w:130,a:'center'},{l:'ថ្ងៃឈប់',w:105,a:'center'}];
+  const SC=[{l:'#',w:36,a:'center'},{l:'ឈ្មោះ',w:190,a:'left'},{l:'ភេទ',w:72,a:'center'},{l:'នាយកដ្ឋាន',w:150,a:'left'},{l:'ចូលធ្វើការ',w:105,a:'center'},{l:'ស្ថានភាព',w:130,a:'center'},{l:'ថ្ងៃឈប់',w:105,a:'center'}];
   const STW=SC.reduce((s,c)=>s+c.w,0);
   const SX=PAD+(W-PAD*2-STW)/2;
   cx=SX;
   SC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
-  hline(y,blue); hline(y+HH,blue); y+=HH;
+  hline(y,blue);hline(y+HH,blue);y+=HH;
 
-  if(staff.length===0){
-    fill(SX,y,STW,RH,stripe);
-    txt('មិនទាន់មានបុគ្គលិក',SX+STW/2,y+RH/2+5,12,gray,'center');
-    hline(y+RH); y+=RH;
-  } else {
-    staff.forEach((s2,idx)=>{
-      const isHL=hs&&s2.id===hs.id;
-      const bg=isHL?'#fefce8':idx%2===0?white:stripe;
-      const stBg=s2.status==='កំពុងធ្វើការ'?greenLt:s2.status==='ឈប់ខ្លួនឯង'?amberLt:redLt;
-      const stFg=s2.status==='កំពុងធ្វើការ'?green:s2.status==='ឈប់ខ្លួនឯង'?amber:red;
-      const sxBg=s2.sex==='ប្រុស'?blueLt:pinkLt;
-      const sxFg=s2.sex==='ប្រុស'?blue:pink;
-      cx=SX; fill(SX,y,STW,RH,bg);
-      SC.forEach((c,i)=>{
-        const midX=cx+c.w/2, midY=y+RH/2+5;
-        if(i===2) badge(s2.sex,midX,midY,sxBg,sxFg);
-        else if(i===5) badge(s2.status,midX,midY,stBg,stFg);
-        else {
-          const v=[String(idx+1),s2.name,'',s2.dept||'—',s2.joinDate||'—','',s2.leaveDate||'—'][i];
-          txt(v,c.a==='center'?midX:cx+8,midY,12,i===1?text:gray,c.a,i===1,c.w-8);
-        }
-        vline(cx,y,RH); cx+=c.w;
-      });
-      hline(y+RH); y+=RH;
+  staff.forEach((s2,idx)=>{
+    const isHL=hs&&s2.id===hs.id;
+    const bg=isHL?'#fefce8':idx%2===0?white:stripe;
+    const stBg=s2.status==='កំពុងធ្វើការ'?greenLt:s2.status==='ឈប់ខ្លួនឯង'?amberLt:redLt;
+    const stFg=s2.status==='កំពុងធ្វើការ'?green:s2.status==='ឈប់ខ្លួនឯង'?amber:red;
+    const sxBg=s2.sex==='ប្រុស'?blueLt:pinkLt;
+    const sxFg=s2.sex==='ប្រុស'?blue:pink;
+    cx=SX; fill(SX,y,STW,RH,bg);
+    SC.forEach((c,i)=>{
+      const midX=cx+c.w/2, midY=y+RH/2+5;
+      if(i===2) badge(s2.sex,midX,midY,sxBg,sxFg);
+      else if(i===5) badge(s2.status,midX,midY,stBg,stFg);
+      else{
+        const vals=[String(idx+1),s2.name,'',s2.dept||'—',s2.joinDate||'—','',s2.leaveDate||'—'];
+        txt(vals[i],c.a==='center'?midX:cx+8,midY,12,i===1?textC:gray,c.a,i===1,c.w-8);
+      }
+      vline(cx,y,RH); cx+=c.w;
     });
-    ctx.strokeStyle=border;ctx.lineWidth=1;ctx.strokeRect(SX,y-staff.length*RH-HH,STW,staff.length*RH+HH);
-  }
+    hline(y+RH); y+=RH;
+  });
+  ctx.strokeStyle=border;ctx.lineWidth=1;ctx.strokeRect(SX,y-staff.length*RH-HH,STW,staff.length*RH+HH);
 
   /* ALERT */
   if(hs&&action){
@@ -697,7 +673,7 @@ function buildImage(action, hs){
     rrect(PAD,y,W-PAD*2,ALERT_H,8,aBg);
     ctx.strokeStyle=aFg+'55';ctx.lineWidth=.5;ctx.strokeRect(PAD,y,W-PAD*2,ALERT_H);
     txt(aLbl+hs.name,PAD+14,y+17,12,aFg,'left',true);
-    txt((hs.dept||'')+(hs.joinDate?' | ចូល: '+hs.joinDate:'')+(hs.leaveDate?' | ឈប់: '+hs.leaveDate:'')+'  | '+hs.status,PAD+14,y+35,11,aFg);
+    txt((hs.dept||'')+(hs.joinDate?' | ចូល: '+hs.joinDate:'')+(hs.leaveDate?' | ឈប់: '+hs.leaveDate:'')+' | '+hs.status,PAD+14,y+35,11,aFg);
     y+=ALERT_H;
   }
 
@@ -708,14 +684,13 @@ function buildImage(action, hs){
   return cv.toDataURL('image/png');
 }
 
-/* ═══════════════════════════════════════
-   SEND TO TELEGRAM
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════
+   TELEGRAM SEND
+═══════════════════════════════════ */
 async function doSendImage(dataUrl){
   if(!tgCfg.token||!tgCfg.chatId) return false;
   try{
-    const blob=(await fetch(dataUrl)).blob?await(await fetch(dataUrl)).blob():null;
-    if(!blob) return false;
+    const blob=await(await fetch(dataUrl)).blob();
     const fd=new FormData();
     fd.append('chat_id',tgCfg.chatId);
     fd.append('photo',blob,'report.png');
@@ -742,9 +717,9 @@ async function sendReport(){
   if(ok) showToast('ផ្ញើរបាយការណ៍ជោគជ័យ ✓','ok');
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    EXPORT CSV
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 function exportCSV(){
   const h=['#','ឈ្មោះ','ភេទ','នាយកដ្ឋាន','ចូលធ្វើការ','ស្ថានភាព','ថ្ងៃឈប់','កំណត់ចំណាំ'];
   const rows=staff.map((s,i)=>[i+1,s.name,s.sex,s.dept||'',s.joinDate||'',s.status,s.leaveDate||'',s.note||'']);
@@ -755,9 +730,9 @@ function exportCSV(){
   showToast('Export CSV ✓','ok');
 }
 
-/* ═══════════════════════════════════════
+/* ═══════════════════════════════════
    INIT
-═══════════════════════════════════════ */
+═══════════════════════════════════ */
 updateTgBar();
 renderStats();
 refreshDepts();
