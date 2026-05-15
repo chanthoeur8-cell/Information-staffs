@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="km">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>គ្រប់គ្រងបុគ្គលិក</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Staff Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#0f2744;--blue:#1a56db;--blue-lt:#e8f0fe;
@@ -17,7 +17,7 @@
   --radius:10px;--shadow:0 1px 4px rgba(0,0,0,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans Khmer',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
 .topbar{background:var(--navy);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
 .topbar-brand span{font-size:16px;font-weight:600;color:#fff}
 .topbar-brand sub{font-size:11px;color:#90a4c8;font-weight:300;margin-left:4px}
@@ -29,7 +29,7 @@ body{font-family:'Noto Sans Khmer',sans-serif;background:var(--bg);color:var(--t
 .btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#0a6340}
 .btn-sm{padding:5px 10px;font-size:12px;border-radius:6px}
 .btn-icon{padding:5px 8px;border-radius:6px;background:transparent;border:1px solid transparent;cursor:pointer;font-size:15px;transition:background .12s}.btn-icon:hover{background:#f0f2f5}
-.page{max-width:1120px;margin:0 auto;padding:20px 16px}
+.page{max-width:1280px;margin:0 auto;padding:20px 16px}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:20px}
 .stat-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;box-shadow:var(--shadow)}
 .stat-card .lbl{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
@@ -37,7 +37,7 @@ body{font-family:'Noto Sans Khmer',sans-serif;background:var(--bg);color:var(--t
 .stat-card .sub{font-size:11px;color:var(--muted);margin-top:4px}
 .c-navy{color:var(--navy)}.c-blue{color:var(--blue)}.c-green{color:var(--green)}
 .c-amber{color:var(--amber)}.c-red{color:var(--red)}.c-pink{color:var(--pink)}
-.main-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+.main-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
 .card-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .card-header-left{display:flex;gap:8px;flex:1;flex-wrap:wrap}
 .search-box{position:relative;flex:1;min-width:180px}
@@ -72,7 +72,7 @@ tbody tr:hover td{background:#f7f9ff}
 .pg-btn{padding:4px 9px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:12px;font-family:inherit}
 .pg-btn:hover{background:#f0f2f5}.pg-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.pg-btn:disabled{opacity:.4;cursor:default}
 .modal-mask{position:fixed;inset:0;background:rgba(10,20,40,.45);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px}
-.modal-box{background:#fff;border-radius:14px;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal-box{background:#fff;border-radius:14px;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
 .modal-head{padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .modal-head h3{font-size:16px;font-weight:600}
 .modal-body{padding:20px}
@@ -101,89 +101,206 @@ tbody tr:hover td{background:#f7f9ff}
 .toast{position:fixed;bottom:24px;right:24px;background:#111;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;max-width:320px}
 .toast.show{opacity:1;transform:translateY(0)}
 #cv{position:absolute;left:-9999px;top:-9999px}
-@media(max-width:640px){.form-grid{grid-template-columns:1fr}.topbar{padding:0 12px}.page{padding:14px 10px}.status-picker{grid-template-columns:1fr}.topbar-actions{gap:4px}.btn{padding:7px 10px;font-size:12px}}
+
+/* MONTHLY SUMMARY */
+.monthly-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden}
+.monthly-header{background:linear-gradient(135deg,#064e3b,#065f46);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.monthly-header h2{color:#fff;font-size:15px;font-weight:600}
+.month-sel{padding:6px 10px;border-radius:7px;font-family:inherit;font-size:13px;background:#ffffff20;color:#fff;border:1px solid #ffffff33;outline:none}
+.month-sel option{background:#064e3b;color:#fff}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));border-top:1px solid var(--border)}
+.s-item{padding:16px 18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.s-item .s-lbl{font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.s-item .s-val{font-size:24px;font-weight:700}
+.s-item .s-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ATTENDANCE */
+.attend-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px}
+.attend-header{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.attend-header h2{color:#fff;font-size:15px;font-weight:600}
+.section-title{padding:14px 20px 10px;font-size:14px;font-weight:700;color:var(--navy);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.attend-table-wrap{overflow-x:auto}
+.attend-table{width:100%;border-collapse:collapse;font-size:13px}
+.attend-table thead th{padding:10px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);background:#f9fafb;border-bottom:1px solid var(--border);white-space:nowrap}
+.attend-table tbody td{padding:9px 12px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+.attend-table tbody tr:hover td{background:#f7f9ff}
+.late-entry{display:inline-flex;align-items:center;gap:4px;margin:2px;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:500}
+.late-heavy{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.late-medium{background:#fef3c7;color:#b45309;border:1px solid #fcd34d}
+.late-light{background:#dbeafe;color:#1d4ed8;border:1px solid #93c5fd}
+.btn-add-late{padding:3px 8px;font-size:11px;border-radius:6px;background:#ede9fe;color:#6d28d9;border:1px dashed #a78bfa;cursor:pointer;font-family:inherit;font-weight:500}
+.btn-add-late:hover{background:#ddd6fe}
+.btn-del-late{background:none;border:none;cursor:pointer;font-size:12px;opacity:.6;padding:0 2px;line-height:1}
+.btn-del-late:hover{opacity:1}
+.late-add-row{display:flex;gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.late-add-row input[type=number]{width:70px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;outline:none}
+.late-add-row input[type=number]:focus{border-color:var(--blue)}
+.late-add-row select{padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;outline:none;cursor:pointer}
+.btn-confirm-late{padding:5px 10px;font-size:12px;border-radius:6px;background:var(--blue);color:#fff;border:none;cursor:pointer;font-family:inherit;font-weight:500}
+.btn-cancel-late{padding:5px 10px;font-size:12px;border-radius:6px;background:#f3f4f6;color:var(--text);border:1px solid var(--border);cursor:pointer;font-family:inherit}
+.num-input{width:68px;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;outline:none;text-align:center}
+.num-input:focus{border-color:var(--blue)}
+.attend-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);flex-wrap:wrap;gap:8px}
+.attend-summary{display:flex;gap:14px;flex-wrap:wrap}
+.sum-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block;margin-right:4px}
+
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr}.topbar{padding:0 12px}.page{padding:14px 10px}
+  .status-picker{grid-template-columns:1fr}.topbar-actions{gap:4px}.btn{padding:7px 10px;font-size:12px}
+  .summary-grid{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-brand">
-    <span>👥 គ្រប់គ្រងបុគ្គលិក<sub>Staff Management</sub></span>
+    <span>👥 Staff Management<sub>v2.0</sub></span>
   </div>
   <div class="topbar-actions">
     <button class="btn btn-tg" onclick="openTgModal()">✈ Telegram</button>
-    <button class="btn btn-white" onclick="sendReport()">📊 ផ្ញើរបាយការណ៍</button>
-    <button class="btn btn-blue" onclick="openForm()">＋ បន្ថែម</button>
+    <button class="btn btn-white" onclick="sendReport()">📊 Send Report</button>
+    <button class="btn btn-blue" onclick="openForm()">＋ Add Staff</button>
   </div>
 </div>
 
 <div class="page">
 
+  <!-- Telegram bar -->
   <div class="tg-bar" id="tgBar">
     <div class="tg-dot" id="tgDot"></div>
     <div class="tg-bar-text">
-      <strong>Telegram ភ្ជាប់ហើយ ✓</strong>
-      <span id="tgBarSub">Auto-notification បើក — ផ្ញើ Image ស្អាតដូច Excel ទៅ Group</span>
+      <strong>Telegram Connected ✓</strong>
+      <span id="tgBarSub">Auto-notification ON — sends image report to group</span>
     </div>
-    <button class="btn btn-sm" id="tgToggleBtn" onclick="toggleTg()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">បិទ</button>
-    <button class="btn btn-sm" onclick="openTgModal()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">⚙ កំណត់</button>
+    <button class="btn btn-sm" id="tgToggleBtn" onclick="toggleTg()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">Turn Off</button>
+    <button class="btn btn-sm" onclick="openTgModal()" style="background:#fff3;color:#fff;border:1px solid #ffffff55">⚙ Settings</button>
   </div>
 
+  <!-- Overall Stats -->
   <div class="stat-grid" id="stats"></div>
 
+  <!-- ══════════════════════
+       STAFF LIST
+  ══════════════════════ -->
   <div class="main-card">
     <div class="card-header">
       <div class="card-header-left">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="ស្វែងរកឈ្មោះ ឬ នាយកដ្ឋាន..." oninput="applyFilter()">
+          <input type="text" id="searchInput" placeholder="Search name or department..." oninput="applyFilter()">
         </div>
         <select class="filter" id="fSex" onchange="applyFilter()">
-          <option value="">ភេទទាំងអស់</option>
-          <option value="ប្រុស">ប្រុស</option>
-          <option value="ស្រី">ស្រី</option>
+          <option value="">All Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
         <select class="filter" id="fStatus" onchange="applyFilter()">
-          <option value="">ស្ថានភាពទាំងអស់</option>
-          <option value="កំពុងធ្វើការ">កំពុងធ្វើការ</option>
-          <option value="ឈប់ខ្លួនឯង">ឈប់ខ្លួនឯង</option>
-          <option value="ត្រូវបញ្ឈប់">ត្រូវបញ្ឈប់</option>
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Resigned">Resigned</option>
+          <option value="Terminated">Terminated</option>
         </select>
         <select class="filter" id="fDept" onchange="applyFilter()">
-          <option value="">នាយកដ្ឋានទាំងអស់</option>
+          <option value="">All Departments</option>
         </select>
       </div>
       <button class="btn btn-sm btn-green" onclick="exportCSV()">⬇ CSV</button>
     </div>
-
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th style="width:36px">#</th>
-            <th>ឈ្មោះ</th>
-            <th>ភេទ</th>
-            <th>នាយកដ្ឋាន</th>
-            <th>ចូលធ្វើការ</th>
-            <th>ស្ថានភាព</th>
-            <th>ថ្ងៃឈប់</th>
-            <th style="width:180px">ប្តូរស្ថានភាព</th>
-            <th style="width:80px">សកម្មភាព</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Department</th>
+            <th>Join Date</th>
+            <th>Status</th>
+            <th>Leave Date</th>
+            <th style="width:190px">Change Status</th>
+            <th style="width:80px">Actions</th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
       </table>
       <div id="emptyState" class="empty" style="display:none">
         <div class="empty-icon">📋</div>
-        <div>មិនមានបុគ្គលិកក្នុងបញ្ជី</div>
+        <div>No staff records found</div>
       </div>
     </div>
-
     <div class="card-footer">
       <span id="pageInfo"></span>
       <div class="pg-btns" id="pgBtns"></div>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════════
+       MONTHLY SUMMARY CARD
+  ══════════════════════════════════════ -->
+  <div class="monthly-card">
+    <div class="monthly-header">
+      <h2>📅 Monthly Summary — <span id="summaryLabel"></span></h2>
+      <div style="display:flex;gap:8px">
+        <select class="month-sel" id="sumMonth" onchange="syncMonthYear()">
+          <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+          <option value="4">April</option><option value="5" selected>May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+          <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+        </select>
+        <select class="month-sel" id="sumYear" onchange="syncMonthYear()">
+          <option value="2025">2025</option>
+          <option value="2026" selected>2026</option>
+        </select>
+      </div>
+    </div>
+    <div class="summary-grid" id="summaryGrid"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ATTENDANCE & LATE TRACKING
+  ══════════════════════════════════════ -->
+  <div class="attend-card">
+    <div class="attend-header">
+      <h2>⏰ Late Arrivals &amp; Working Hours Tracker</h2>
+      <button class="btn btn-sm" style="background:#fff3;color:#fff;border:1px solid #ffffff55" onclick="exportAttendCSV()">⬇ Export CSV</button>
+    </div>
+
+    <div class="section-title">
+      📋 Log for <span id="attendLabel" style="color:var(--blue);margin-left:4px"></span>
+    </div>
+
+    <div class="attend-table-wrap">
+      <table class="attend-table">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th style="min-width:155px">Name</th>
+            <th style="min-width:130px">Department</th>
+            <th style="min-width:250px">
+              Late Arrivals
+              <div style="display:flex;gap:10px;margin-top:3px;font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">
+                <span style="color:#b91c1c">🔴 ≥30 min</span>
+                <span style="color:#b45309">🟡 15–29 min</span>
+                <span style="color:#1d4ed8">🔵 &lt;15 min</span>
+              </div>
+            </th>
+            <th style="min-width:90px;text-align:center">Total Late (min)</th>
+            <th style="min-width:80px;text-align:center">Times Late</th>
+            <th style="min-width:110px;text-align:center">Absences / Month</th>
+            <th style="min-width:145px">Work Hours / Month</th>
+          </tr>
+        </thead>
+        <tbody id="attendTbody"></tbody>
+      </table>
+    </div>
+
+    <div class="attend-footer">
+      <div class="attend-summary" id="attendSummary"></div>
+      <div style="font-size:11px;color:#9ca3af">Click ＋ Late to log a late arrival</div>
+    </div>
+  </div>
+
 </div>
 
 <canvas id="cv"></canvas>
@@ -202,85 +319,128 @@ tbody tr:hover td{background:#f7f9ff}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ═══════════════════════════════════
+/* ═══════════════════════════
    TELEGRAM CONFIG
-═══════════════════════════════════ */
-let tgCfg = {
-  token:   '8253508040:AAHqbIxWCBTHGHv-9oLRQXAT2hqWJE6U3wY',
-  chatId:  '-1003938048448',
-  enabled: true
-};
+═══════════════════════════ */
+let tgCfg={token:'8253508040:AAHqbIxWCBTHGHv-9oLRQXAT2hqWJE6U3wY',chatId:'-1003938048448',enabled:true};
 
-/* ═══════════════════════════════════
-   STAFF DATA — 17 បុគ្គលិក
-═══════════════════════════════════ */
-let staff = [
-  {id:1,  name:'Desha Bushell',        sex:'ស្រី',  dept:'English Teacher',     joinDate:'2026-03-23', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:2,  name:'Ly Mary',              sex:'ស្រី',  dept:'English Teacher',     joinDate:'2026-03-12', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:3,  name:'Kosal Seakmeng',       sex:'ស្រី',  dept:'Assistance Teacher',  joinDate:'2026-02-05', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:4,  name:'Chhoeurn Chanthoeurn', sex:'ស្រី',  dept:'IT',                  joinDate:'2026-01-19', leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:5,  name:'Vin Serypheap',        sex:'ស្រី',  dept:'Assistance Teacher',  joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:6,  name:'Ashley Villela',       sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:7,  name:'Chamnan Veasna',       sex:'ប្រុស', dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:8,  name:'Chot Horn',            sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:9,  name:'Sok Sreypich',         sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:10, name:'Dorn Sreyneth',        sex:'ស្រី',  dept:'English Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:11, name:'Leang Sopheavy',       sex:'ស្រី',  dept:'IT',                  joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:12, name:'Vat Mouysaing',        sex:'ស្រី',  dept:'Chinese Teacher',     joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:13, name:'Born Chhorda',         sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:14, name:'Chemvan Lyhorng',      sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:15, name:'Eng Sreynin',          sex:'ស្រី',  dept:'Receptionist',        joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:16, name:'Oeun Kanal',           sex:'ប្រុស', dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
-  {id:17, name:'Moeung Sreynith',      sex:'ស្រី',  dept:'Khmer Teacher',       joinDate:'',           leaveDate:'', status:'កំពុងធ្វើការ', note:''},
+/* ═══════════════════════════
+   STAFF DATA
+═══════════════════════════ */
+let staff=[
+  {id:1, name:'Desha Bushell',        sex:'Female',dept:'English Teacher',   joinDate:'2026-03-23',leaveDate:'',status:'Active',note:''},
+  {id:2, name:'Ly Mary',              sex:'Female',dept:'English Teacher',   joinDate:'2026-03-12',leaveDate:'',status:'Active',note:''},
+  {id:3, name:'Kosal Seakmeng',       sex:'Female',dept:'Assistance Teacher',joinDate:'2026-02-05',leaveDate:'',status:'Active',note:''},
+  {id:4, name:'Chhoeurn Chanthoeurn', sex:'Female',dept:'IT',                joinDate:'2026-01-19',leaveDate:'',status:'Active',note:''},
+  {id:5, name:'Vin Serypheap',        sex:'Female',dept:'Assistance Teacher',joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:6, name:'Ashley Villela',       sex:'Female',dept:'English Teacher',   joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:7, name:'Chamnan Veasna',       sex:'Male',  dept:'English Teacher',   joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:8, name:'Chot Horn',            sex:'Female',dept:'Khmer Teacher',     joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:9, name:'Sok Sreypich',         sex:'Female',dept:'English Teacher',   joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:10,name:'Dorn Sreyneth',        sex:'Female',dept:'English Teacher',   joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:11,name:'Leang Sopheavy',       sex:'Female',dept:'IT',                joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:12,name:'Vat Mouysaing',        sex:'Female',dept:'Chinese Teacher',   joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:13,name:'Born Chhorda',         sex:'Female',dept:'Khmer Teacher',     joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:14,name:'Chemvan Lyhorng',      sex:'Female',dept:'Khmer Teacher',     joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:15,name:'Eng Sreynin',          sex:'Female',dept:'Receptionist',      joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:16,name:'Oeun Kanal',           sex:'Male',  dept:'Khmer Teacher',     joinDate:'',          leaveDate:'',status:'Active',note:''},
+  {id:17,name:'Moeung Sreynith',      sex:'Female',dept:'Khmer Teacher',     joinDate:'',          leaveDate:'',status:'Active',note:''},
 ];
-let nextId = 18;
-let filtered = [], page = 1, editId = null, selStatus = 'កំពុងធ្វើការ';
-const PER = 20;
+let nextId=18, filtered=[], page=1, editId=null, selStatus='Active';
+const PER=20;
 
-/* ═══════════════════════════════════
+/* attendance data: key=id_year_mm => {lates:[{min,type}], workHours:'', absences:''} */
+let attendData={};
+let addingLateFor=null;
+
+const MONTHS=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function attKey(id,m,y){return `${id}_${y}_${String(m).padStart(2,'0')}`;}
+function attRec(id,m,y){const k=attKey(id,m,y);if(!attendData[k])attendData[k]={lates:[],workHours:'',absences:''};return attendData[k];}
+function lateType(min){return min>=30?'heavy':min>=15?'medium':'light';}
+function lateCls(t){return t==='heavy'?'late-heavy':t==='medium'?'late-medium':'late-light';}
+function lateEm(t){return t==='heavy'?'🔴':t==='medium'?'🟡':'🔵';}
+
+function getMY(){return{m:+document.getElementById('sumMonth').value, y:+document.getElementById('sumYear').value};}
+
+function syncMonthYear(){
+  // keep attend label in sync
+  renderMonthlySummary();
+  renderAttendance();
+}
+
+/* ═══════════════════════════
    TOAST
-═══════════════════════════════════ */
+═══════════════════════════ */
 let toastTimer;
-function showToast(msg, type='info'){
+function showToast(msg,type='info'){
   const t=document.getElementById('toast');
   t.textContent=msg;
   t.style.background=type==='ok'?'#065f46':type==='err'?'#7f1d1d':type==='warn'?'#78350f':'#1e3a5f';
-  t.classList.add('show'); clearTimeout(toastTimer);
+  t.classList.add('show');clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),3200);
 }
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
    STATS
-═══════════════════════════════════ */
+═══════════════════════════ */
 function pct(n,t){return t?Math.round(n/t*100):0;}
 function renderStats(){
-  const t=staff.length, m=staff.filter(s=>s.sex==='ប្រុស').length,
-        f=staff.filter(s=>s.sex==='ស្រី').length,
-        a=staff.filter(s=>s.status==='កំពុងធ្វើការ').length,
-        r=staff.filter(s=>s.status==='ឈប់ខ្លួនឯង').length,
-        d=staff.filter(s=>s.status==='ត្រូវបញ្ឈប់').length;
+  const t=staff.length,m=staff.filter(s=>s.sex==='Male').length,f=staff.filter(s=>s.sex==='Female').length,
+        a=staff.filter(s=>s.status==='Active').length,r=staff.filter(s=>s.status==='Resigned').length,
+        d=staff.filter(s=>s.status==='Terminated').length;
   document.getElementById('stats').innerHTML=`
-    <div class="stat-card"><div class="lbl">👥 សរុបទាំងអស់</div><div class="val c-navy">${t}</div><div class="sub">នាក់</div></div>
-    <div class="stat-card"><div class="lbl">👨 ប្រុស</div><div class="val c-blue">${m}</div><div class="sub">${pct(m,t)}% នៃសរុប</div></div>
-    <div class="stat-card"><div class="lbl">👩 ស្រី</div><div class="val c-pink">${f}</div><div class="sub">${pct(f,t)}% នៃសរុប</div></div>
-    <div class="stat-card"><div class="lbl">🟢 កំពុងធ្វើការ</div><div class="val c-green">${a}</div><div class="sub">${pct(a,t)}%</div></div>
-    <div class="stat-card"><div class="lbl">🟡 ឈប់ខ្លួនឯង</div><div class="val c-amber">${r}</div><div class="sub">${pct(r,t)}%</div></div>
-    <div class="stat-card"><div class="lbl">🔴 ត្រូវបញ្ឈប់</div><div class="val c-red">${d}</div><div class="sub">${pct(d,t)}%</div></div>`;
+    <div class="stat-card"><div class="lbl">👥 Total Staff</div><div class="val c-navy">${t}</div><div class="sub">people</div></div>
+    <div class="stat-card"><div class="lbl">👨 Male</div><div class="val c-blue">${m}</div><div class="sub">${pct(m,t)}% of total</div></div>
+    <div class="stat-card"><div class="lbl">👩 Female</div><div class="val c-pink">${f}</div><div class="sub">${pct(f,t)}% of total</div></div>
+    <div class="stat-card"><div class="lbl">🟢 Active</div><div class="val c-green">${a}</div><div class="sub">${pct(a,t)}%</div></div>
+    <div class="stat-card"><div class="lbl">🟡 Resigned</div><div class="val c-amber">${r}</div><div class="sub">${pct(r,t)}%</div></div>
+    <div class="stat-card"><div class="lbl">🔴 Terminated</div><div class="val c-red">${d}</div><div class="sub">${pct(d,t)}%</div></div>`;
 }
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
+   MONTHLY SUMMARY
+═══════════════════════════ */
+function renderMonthlySummary(){
+  const {m,y}=getMY();
+  document.getElementById('summaryLabel').textContent=`${MONTHS[m]} ${y}`;
+  const active=staff.filter(s=>s.status==='Active');
+  let totalLate=0,totalLateMin=0,totalAbsences=0,totalHours=0,hoursCount=0,heavyTotal=0;
+  active.forEach(s=>{
+    const rec=attRec(s.id,m,y);
+    const lates=rec.lates||[];
+    totalLate+=lates.length;
+    totalLateMin+=lates.reduce((acc,l)=>acc+l.min,0);
+    heavyTotal+=lates.filter(l=>l.type==='heavy').length;
+    const abs=parseInt(rec.absences)||0; totalAbsences+=abs;
+    if(rec.workHours!==''){totalHours+=parseFloat(rec.workHours)||0;hoursCount++;}
+  });
+  const leftThisMonth=staff.filter(s=>{
+    if(!['Resigned','Terminated'].includes(s.status)||!s.leaveDate) return false;
+    const d=new Date(s.leaveDate);
+    return d.getFullYear()===y&&(d.getMonth()+1)===m;
+  });
+  document.getElementById('summaryGrid').innerHTML=`
+    <div class="s-item"><div class="s-lbl">👥 Active Staff</div><div class="s-val c-green">${active.length}</div><div class="s-sub">currently working</div></div>
+    <div class="s-item"><div class="s-lbl">⏰ Total Late Arrivals</div><div class="s-val c-red">${totalLate}</div><div class="s-sub">${totalLateMin} minutes combined</div></div>
+    <div class="s-item"><div class="s-lbl">🚫 Total Absences</div><div class="s-val c-amber">${totalAbsences}</div><div class="s-sub">days absent (all staff)</div></div>
+    <div class="s-item"><div class="s-lbl">🕐 Avg Work Hours</div><div class="s-val c-navy">${hoursCount?+(totalHours/hoursCount).toFixed(1):0}</div><div class="s-sub">hrs/person (${hoursCount} recorded)</div></div>
+    <div class="s-item"><div class="s-lbl">📤 Left This Month</div><div class="s-val" style="color:#6d28d9">${leftThisMonth.length}</div><div class="s-sub">${leftThisMonth.map(s=>s.name).join(', ')||'None'}</div></div>
+    <div class="s-item"><div class="s-lbl">🔴 Heavy Late (≥30 min)</div><div class="s-val c-red">${heavyTotal}</div><div class="s-sub">times across all staff</div></div>`;
+}
+
+/* ═══════════════════════════
    DEPT FILTER
-═══════════════════════════════════ */
+═══════════════════════════ */
 function refreshDepts(){
   const depts=[...new Set(staff.map(s=>s.dept).filter(Boolean))].sort();
-  const sel=document.getElementById('fDept'), cur=sel.value;
-  sel.innerHTML='<option value="">នាយកដ្ឋានទាំងអស់</option>'
-    +depts.map(d=>`<option value="${d}" ${d===cur?'selected':''}>${d}</option>`).join('');
+  const sel=document.getElementById('fDept'),cur=sel.value;
+  sel.innerHTML='<option value="">All Departments</option>'+depts.map(d=>`<option value="${d}"${d===cur?' selected':''}>${d}</option>`).join('');
 }
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
    FILTER & TABLE
-═══════════════════════════════════ */
+═══════════════════════════ */
 function applyFilter(){
   const q=document.getElementById('searchInput').value.toLowerCase();
   const sex=document.getElementById('fSex').value;
@@ -288,132 +448,261 @@ function applyFilter(){
   const dept=document.getElementById('fDept').value;
   filtered=staff.filter(s=>
     (!q||s.name.toLowerCase().includes(q)||(s.dept||'').toLowerCase().includes(q))&&
-    (!sex||s.sex===sex)&&(!status||s.status===status)&&(!dept||s.dept===dept)
-  );
-  page=1; renderTable();
+    (!sex||s.sex===sex)&&(!status||s.status===status)&&(!dept||s.dept===dept));
+  page=1;renderTable();
 }
-
 function renderTable(){
-  const total=filtered.length, pages=Math.max(1,Math.ceil(total/PER));
-  if(page>pages) page=pages;
-  const start=(page-1)*PER, rows=filtered.slice(start,start+PER);
-  const tbody=document.getElementById('tbody'), empty=document.getElementById('emptyState');
+  const total=filtered.length,pages=Math.max(1,Math.ceil(total/PER));
+  if(page>pages)page=pages;
+  const start=(page-1)*PER,rows=filtered.slice(start,start+PER);
+  const tbody=document.getElementById('tbody'),empty=document.getElementById('emptyState');
   if(!rows.length){tbody.innerHTML='';empty.style.display='block';}
   else{
     empty.style.display='none';
     tbody.innerHTML=rows.map((s,i)=>{
-      const sb=s.status==='កំពុងធ្វើការ'?'badge-active':s.status==='ឈប់ខ្លួនឯង'?'badge-resigned':'badge-terminated';
-      return `<tr>
+      const sb=s.status==='Active'?'badge-active':s.status==='Resigned'?'badge-resigned':'badge-terminated';
+      return`<tr>
         <td style="color:#9ca3af;font-size:12px">${start+i+1}</td>
         <td><div class="name-cell">${s.name}</div></td>
-        <td><span class="badge ${s.sex==='ប្រុស'?'badge-m':'badge-f'}">${s.sex}</span></td>
+        <td><span class="badge ${s.sex==='Male'?'badge-m':'badge-f'}">${s.sex}</span></td>
         <td class="dept-cell">${s.dept||'—'}</td>
         <td class="date-cell">${s.joinDate||'—'}</td>
         <td><span class="badge ${sb}">${s.status}</span></td>
         <td class="date-cell">${s.leaveDate||'—'}</td>
         <td><div class="action-pills">
-          ${s.status!=='ឈប់ខ្លួនឯង'?`<button class="pill pill-resigned" onclick="setStatus(${s.id},'ឈប់ខ្លួនឯង')">ឈប់ខ្លួន</button>`:''}
-          ${s.status!=='ត្រូវបញ្ឈប់'?`<button class="pill pill-terminated" onclick="setStatus(${s.id},'ត្រូវបញ្ឈប់')">បញ្ឈប់</button>`:''}
-          ${s.status!=='កំពុងធ្វើការ'?`<button class="pill pill-active" onclick="setStatus(${s.id},'កំពុងធ្វើការ')">ធ្វើការ</button>`:''}
+          ${s.status!=='Resigned'?`<button class="pill pill-resigned" onclick="setStatus(${s.id},'Resigned')">Resign</button>`:''}
+          ${s.status!=='Terminated'?`<button class="pill pill-terminated" onclick="setStatus(${s.id},'Terminated')">Terminate</button>`:''}
+          ${s.status!=='Active'?`<button class="pill pill-active" onclick="setStatus(${s.id},'Active')">Re-activate</button>`:''}
         </div></td>
         <td><div style="display:flex;gap:2px">
           <button class="btn-icon" onclick="openForm(${s.id})">✏️</button>
           <button class="btn-icon" onclick="deleteStaff(${s.id})">🗑️</button>
-        </div></td>
-      </tr>`;
+        </div></td></tr>`;
     }).join('');
   }
-  document.getElementById('pageInfo').textContent=
-    total===0?'មិនមានទិន្នន័យ':`បង្ហាញ ${start+1}–${Math.min(start+PER,total)} នៃ ${total} នាក់`;
-  let btns=`<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>‹</button>`;
+  document.getElementById('pageInfo').textContent=total===0?'No records':`Showing ${start+1}–${Math.min(start+PER,total)} of ${total} staff`;
+  let btns=`<button class="pg-btn" onclick="goPage(${page-1})"${page===1?' disabled':''}>‹</button>`;
   for(let p=1;p<=pages;p++){
-    if(pages<=7||p===1||p===pages||Math.abs(p-page)<=1)
-      btns+=`<button class="pg-btn ${p===page?'active':''}" onclick="goPage(${p})">${p}</button>`;
+    if(pages<=7||p===1||p===pages||Math.abs(p-page)<=1) btns+=`<button class="pg-btn${p===page?' active':''}" onclick="goPage(${p})">${p}</button>`;
     else if(Math.abs(p-page)===2) btns+=`<span style="padding:4px;color:#9ca3af">…</span>`;
   }
-  btns+=`<button class="pg-btn" onclick="goPage(${page+1})" ${page===pages?'disabled':''}>›</button>`;
+  btns+=`<button class="pg-btn" onclick="goPage(${page+1})"${page===pages?' disabled':''}>›</button>`;
   document.getElementById('pgBtns').innerHTML=btns;
 }
 function goPage(p){const pages=Math.ceil(filtered.length/PER);if(p<1||p>pages)return;page=p;renderTable();}
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
    SET STATUS
-═══════════════════════════════════ */
+═══════════════════════════ */
 function setStatus(id,status){
   const s=staff.find(x=>x.id===id);
   s.status=status;
-  if(status!=='កំពុងធ្វើការ'&&!s.leaveDate) s.leaveDate=new Date().toISOString().slice(0,10);
-  if(status==='កំពុងធ្វើការ') s.leaveDate='';
-  renderStats(); applyFilter();
+  if(status!=='Active'&&!s.leaveDate)s.leaveDate=new Date().toISOString().slice(0,10);
+  if(status==='Active')s.leaveDate='';
+  renderStats();applyFilter();renderMonthlySummary();renderAttendance();
   showToast(`${s.name} → ${status}`,'ok');
   sendAutoAlert('EDIT',s);
 }
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
+   ATTENDANCE
+═══════════════════════════ */
+function renderAttendance(){
+  const {m,y}=getMY();
+  document.getElementById('attendLabel').textContent=`${MONTHS[m]} ${y}`;
+  const active=staff.filter(s=>s.status==='Active');
+  let totLate=0,totHeavy=0,totMed=0,totLight=0,totAbs=0;
+
+  document.getElementById('attendTbody').innerHTML=active.map((s,idx)=>{
+    const rec=attRec(s.id,m,y);
+    const lates=rec.lates||[];
+    const totMin=lates.reduce((acc,l)=>acc+l.min,0);
+    const heavy=lates.filter(l=>l.type==='heavy');
+    const med=lates.filter(l=>l.type==='medium');
+    const light=lates.filter(l=>l.type==='light');
+    totLate+=lates.length;totHeavy+=heavy.length;totMed+=med.length;totLight+=light.length;
+    const absVal=parseInt(rec.absences)||0;totAbs+=absVal;
+
+    const showAdd=(addingLateFor===s.id);
+    const tagHtml=lates.map((l,li)=>`<span class="late-entry ${lateCls(l.type)}">${lateEm(l.type)} ${l.min}min<button class="btn-del-late" onclick="deleteLate(${s.id},${li})">✕</button></span>`).join('');
+    const addFormHtml=showAdd?`<div class="late-add-row">
+      <input type="number" id="lm_${s.id}" min="1" max="480" placeholder="min" onkeydown="if(event.key==='Enter')confirmLate(${s.id})">
+      <select id="lt_${s.id}">
+        <option value="auto">⚡ Auto</option>
+        <option value="heavy">🔴 ≥30 min</option>
+        <option value="medium">🟡 15–29 min</option>
+        <option value="light">🔵 &lt;15 min</option>
+      </select>
+      <button class="btn-confirm-late" onclick="confirmLate(${s.id})">✓ Add</button>
+      <button class="btn-cancel-late" onclick="cancelLate()">✕</button>
+    </div>`:'';
+
+    return`<tr>
+      <td style="color:#9ca3af;font-size:12px">${idx+1}</td>
+      <td><div class="name-cell">${s.name}</div></td>
+      <td class="dept-cell">${s.dept||'—'}</td>
+      <td>
+        <div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center">${tagHtml}<button class="btn-add-late" onclick="startAddLate(${s.id})">＋ Late</button></div>
+        ${addFormHtml}
+      </td>
+      <td style="text-align:center">
+        ${totMin>0?`<span style="font-weight:600;color:${totMin>=60?'#b91c1c':totMin>=30?'#b45309':'#1d4ed8'}">${totMin} min</span>`:'<span style="color:#9ca3af">—</span>'}
+      </td>
+      <td style="text-align:center">
+        ${lates.length>0?`<span style="font-weight:600;color:var(--navy)">${lates.length}×</span>`:'<span style="color:#9ca3af">—</span>'}
+      </td>
+      <td style="text-align:center">
+        <div style="display:flex;align-items:center;justify-content:center;gap:5px">
+          <input class="num-input" type="number" id="ab_${s.id}" min="0" max="31"
+            value="${rec.absences!==''?rec.absences:''}" placeholder="0"
+            onchange="saveAbsences(${s.id})" onblur="saveAbsences(${s.id})">
+          <span style="font-size:11px;color:var(--muted)">days</span>
+          ${rec.absences!==''&&+rec.absences>0?'<span style="color:var(--red);font-size:12px">⚠</span>':''}
+        </div>
+      </td>
+      <td>
+        <div style="display:flex;align-items:center;gap:5px">
+          <input class="num-input" style="width:72px" type="number" id="wh_${s.id}" min="0" max="744" step="0.5"
+            value="${rec.workHours!==''?rec.workHours:''}" placeholder="hrs"
+            onchange="saveWorkHours(${s.id})" onblur="saveWorkHours(${s.id})">
+          <span style="font-size:11px;color:var(--muted)">hrs</span>
+          ${rec.workHours!==''?'<span style="color:var(--green);font-size:12px;font-weight:700">✓</span>':''}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('attendSummary').innerHTML=`
+    <span><span class="sum-dot" style="background:#b91c1c"></span>Heavy late (≥30 min): <strong>${totHeavy}×</strong></span>
+    <span><span class="sum-dot" style="background:#b45309"></span>Medium late (15–29 min): <strong>${totMed}×</strong></span>
+    <span><span class="sum-dot" style="background:#1d4ed8"></span>Light late (&lt;15 min): <strong>${totLight}×</strong></span>
+    <span style="border-left:2px solid #dde1e8;padding-left:12px">Total late arrivals: <strong>${totLate}×</strong></span>
+    <span style="border-left:2px solid #dde1e8;padding-left:12px">Total absences: <strong>${totAbs} days</strong></span>`;
+}
+
+function startAddLate(id){addingLateFor=id;renderAttendance();setTimeout(()=>{const el=document.getElementById(`lm_${id}`);if(el)el.focus();},50);}
+function cancelLate(){addingLateFor=null;renderAttendance();}
+function confirmLate(id){
+  const minEl=document.getElementById(`lm_${id}`);
+  const typeEl=document.getElementById(`lt_${id}`);
+  const min=parseInt(minEl?minEl.value:0);
+  if(!min||min<1){showToast('Please enter minutes!','err');return;}
+  const {m,y}=getMY();
+  const rec=attRec(id,m,y);
+  let type=typeEl?typeEl.value:'auto';
+  if(type==='auto')type=lateType(min);
+  rec.lates.push({min,type});
+  addingLateFor=null;
+  showToast('Late arrival recorded ✓','ok');
+  renderAttendance();renderMonthlySummary();
+}
+function deleteLate(id,li){
+  const {m,y}=getMY();attRec(id,m,y).lates.splice(li,1);
+  renderAttendance();renderMonthlySummary();showToast('Record removed','warn');
+}
+function saveWorkHours(id){
+  const el=document.getElementById(`wh_${id}`);if(!el)return;
+  const {m,y}=getMY();
+  attRec(id,m,y).workHours=el.value===''?'':parseFloat(el.value)||0;
+  el.style.borderColor='#10b981';setTimeout(()=>el.style.borderColor='',1200);
+  renderMonthlySummary();
+}
+function saveAbsences(id){
+  const el=document.getElementById(`ab_${id}`);if(!el)return;
+  const {m,y}=getMY();
+  attRec(id,m,y).absences=el.value===''?'':parseInt(el.value)||0;
+  el.style.borderColor='#ef4444';setTimeout(()=>el.style.borderColor='',1200);
+  renderMonthlySummary();
+}
+
+/* ═══════════════════════════
+   EXPORT ATTENDANCE CSV
+═══════════════════════════ */
+function exportAttendCSV(){
+  const {m,y}=getMY();
+  const active=staff.filter(s=>s.status==='Active');
+  const h=['#','Name','Department','Times Late','Heavy (≥30min)','Medium (15-29min)','Light (<15min)','Total Late (min)','Absences (days)','Work Hours/Month'];
+  const rows=active.map((s,i)=>{
+    const rec=attRec(s.id,m,y);
+    const lates=rec.lates||[];
+    return[i+1,s.name,s.dept||'',lates.length,
+      lates.filter(l=>l.type==='heavy').length,
+      lates.filter(l=>l.type==='medium').length,
+      lates.filter(l=>l.type==='light').length,
+      lates.reduce((acc,l)=>acc+l.min,0),
+      rec.absences!==''?rec.absences:0,
+      rec.workHours!==''?rec.workHours:''];
+  });
+  const csv=[h,...rows].map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
+  a.download=`attendance_${y}_${String(m).padStart(2,'0')}.csv`;a.click();
+  showToast('CSV exported ✓','ok');
+}
+
+/* ═══════════════════════════
    FORM MODAL
-═══════════════════════════════════ */
+═══════════════════════════ */
 function openForm(id){
   editId=id||null;
   const s=id?staff.find(x=>x.id===id):null;
-  selStatus=s?s.status:'កំពុងធ្វើការ';
-  document.getElementById('modalTitle').textContent=s?'កែប្រែបុគ្គលិក':'បន្ថែមបុគ្គលិកថ្មី';
+  selStatus=s?s.status:'Active';
+  document.getElementById('modalTitle').textContent=s?'Edit Staff':'Add New Staff';
   document.getElementById('modalBody').innerHTML=`
     <div class="form-grid">
       <div class="form-row form-full">
-        <label>ឈ្មោះពេញ *</label>
-        <input id="fName" value="${s?s.name:''}" placeholder="ដាក់ឈ្មោះបុគ្គលិក...">
+        <label>Full Name *</label>
+        <input id="fName" value="${s?s.name:''}" placeholder="Enter staff name...">
       </div>
       <div class="form-row">
-        <label>ភេទ *</label>
+        <label>Gender *</label>
         <select id="fSexVal">
-          <option ${(!s||s.sex==='ប្រុស')?'selected':''}>ប្រុស</option>
-          <option ${s&&s.sex==='ស្រី'?'selected':''}>ស្រី</option>
+          <option value="Male"${(!s||s.sex==='Male')?' selected':''}>Male</option>
+          <option value="Female"${s&&s.sex==='Female'?' selected':''}>Female</option>
         </select>
       </div>
       <div class="form-row">
-        <label>នាយកដ្ឋាន *</label>
-        <input id="fDeptVal" value="${s?s.dept:''}" list="deptList" placeholder="ឈ្មោះ...">
+        <label>Department *</label>
+        <input id="fDeptVal" value="${s?s.dept:''}" list="deptList" placeholder="Department name...">
         <datalist id="deptList">
           ${[...new Set(staff.map(x=>x.dept).filter(Boolean))].sort().map(d=>`<option value="${d}">`).join('')}
         </datalist>
       </div>
       <div class="form-row">
-        <label>ចូលធ្វើការ <span class="opt-tag">(មិនចាំបាច់)</span></label>
+        <label>Join Date <span class="opt-tag">(optional)</span></label>
         <input type="date" id="fJoin" value="${s?s.joinDate:''}">
       </div>
       <div class="form-row">
-        <label>ថ្ងៃឈប់ <span class="opt-tag">(មិនចាំបាច់)</span></label>
+        <label>Leave Date <span class="opt-tag">(optional)</span></label>
         <input type="date" id="fLeave" value="${s?s.leaveDate:''}">
       </div>
       <div class="form-row form-full">
-        <label>ស្ថានភាព *</label>
+        <label>Status *</label>
         <div class="status-picker">
-          <div class="status-opt ${selStatus==='កំពុងធ្វើការ'?'sel-active':''}" onclick="pickStatus('កំពុងធ្វើការ')">🟢<br>កំពុងធ្វើការ</div>
-          <div class="status-opt ${selStatus==='ឈប់ខ្លួនឯង'?'sel-resigned':''}" onclick="pickStatus('ឈប់ខ្លួនឯង')">🟡<br>ឈប់ខ្លួនឯង</div>
-          <div class="status-opt ${selStatus==='ត្រូវបញ្ឈប់'?'sel-terminated':''}" onclick="pickStatus('ត្រូវបញ្ឈប់')">🔴<br>ត្រូវបញ្ឈប់</div>
+          <div class="status-opt${selStatus==='Active'?' sel-active':''}" onclick="pickStatus('Active')">🟢<br>Active</div>
+          <div class="status-opt${selStatus==='Resigned'?' sel-resigned':''}" onclick="pickStatus('Resigned')">🟡<br>Resigned</div>
+          <div class="status-opt${selStatus==='Terminated'?' sel-terminated':''}" onclick="pickStatus('Terminated')">🔴<br>Terminated</div>
         </div>
       </div>
       <div class="form-row form-full">
-        <label>កំណត់ចំណាំ <span class="opt-tag">(មិនចាំបាច់)</span></label>
-        <textarea id="fNote" placeholder="...">${s?s.note:''}</textarea>
+        <label>Note <span class="opt-tag">(optional)</span></label>
+        <textarea id="fNote" placeholder="Add notes...">${s?s.note:''}</textarea>
       </div>
     </div>`;
   document.getElementById('modalFoot').innerHTML=`
-    <button class="btn btn-white" onclick="closeModal()">បោះបង់</button>
-    <button class="btn btn-blue" onclick="saveStaff()">💾 រក្សាទុក</button>`;
+    <button class="btn btn-white" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-blue" onclick="saveStaff()">💾 Save</button>`;
   document.getElementById('modal').style.display='flex';
 }
-
 function pickStatus(v){
   selStatus=v;
   document.querySelectorAll('.status-opt').forEach(el=>{
     el.className='status-opt';
-    if(el.textContent.includes('កំពុងធ្វើការ')&&v==='កំពុងធ្វើការ') el.classList.add('sel-active');
-    if(el.textContent.includes('ឈប់ខ្លួនឯង')&&v==='ឈប់ខ្លួនឯង') el.classList.add('sel-resigned');
-    if(el.textContent.includes('ត្រូវបញ្ឈប់')&&v==='ត្រូវបញ្ឈប់') el.classList.add('sel-terminated');
+    if(el.textContent.includes('Active')&&v==='Active')el.classList.add('sel-active');
+    if(el.textContent.includes('Resigned')&&v==='Resigned')el.classList.add('sel-resigned');
+    if(el.textContent.includes('Terminated')&&v==='Terminated')el.classList.add('sel-terminated');
   });
 }
-
 function saveStaff(){
   const name=document.getElementById('fName').value.trim();
   const sex=document.getElementById('fSexVal').value;
@@ -421,280 +710,366 @@ function saveStaff(){
   const join=document.getElementById('fJoin').value;
   const leave=document.getElementById('fLeave').value;
   const note=document.getElementById('fNote').value.trim();
-  if(!name||!dept){showToast('សូមបំពេញ ឈ្មោះ និង នាយកដ្ឋាន!','err');return;}
+  if(!name||!dept){showToast('Please fill in Name and Department!','err');return;}
   const data={name,sex,dept,joinDate:join,leaveDate:leave,status:selStatus,note};
   let action,subject;
   if(editId){
     const idx=staff.findIndex(x=>x.id===editId);
-    staff[idx]={...staff[idx],...data}; action='EDIT'; subject=staff[idx];
-    showToast('រក្សាទុករួចរាល់ ✓','ok');
-  } else {
-    const ns={id:nextId++,...data}; staff.push(ns); action='ADD'; subject=ns;
-    showToast('បន្ថែមបុគ្គលិករួចរាល់ ✓','ok');
+    staff[idx]={...staff[idx],...data};action='EDIT';subject=staff[idx];
+    showToast('Saved successfully ✓','ok');
+  }else{
+    const ns={id:nextId++,...data};staff.push(ns);action='ADD';subject=ns;
+    showToast('Staff added successfully ✓','ok');
   }
-  closeModal(); refreshDepts(); renderStats(); applyFilter();
+  closeModal();refreshDepts();renderStats();applyFilter();renderMonthlySummary();renderAttendance();
   sendAutoAlert(action,subject);
 }
-
 function deleteStaff(id){
   const s=staff.find(x=>x.id===id);
-  if(!confirm(`លុប "${s.name}" មែនទេ?`)) return;
-  const copy={...s};
-  staff=staff.filter(x=>x.id!==id);
-  showToast(`លុប ${copy.name} រួចរាល់`,'warn');
-  refreshDepts(); renderStats(); applyFilter();
+  if(!confirm(`Delete "${s.name}"?`))return;
+  const copy={...s};staff=staff.filter(x=>x.id!==id);
+  showToast(`${copy.name} deleted`,'warn');
+  refreshDepts();renderStats();applyFilter();renderMonthlySummary();renderAttendance();
   sendAutoAlert('DELETE',copy);
 }
-
 function closeModal(){document.getElementById('modal').style.display='none';editId=null;}
 
-/* ═══════════════════════════════════
-   TELEGRAM SETTINGS MODAL
-═══════════════════════════════════ */
+/* ═══════════════════════════
+   TELEGRAM MODAL
+═══════════════════════════ */
 function openTgModal(){
-  document.getElementById('modalTitle').textContent='✈ ការកំណត់ Telegram';
+  document.getElementById('modalTitle').textContent='✈ Telegram Settings';
   document.getElementById('modalBody').innerHTML=`
     <div style="background:#eff6ff;border-radius:8px;padding:12px;margin-bottom:16px;font-size:12px;color:#1e40af;line-height:1.8">
-      Token និង Group ID បានដាក់ស្រេចហើយ ✓<br>
-      អ្នកអាចប្តូរបាននៅពេលណាក៏បាន
+      Bot Token and Group Chat ID are pre-configured ✓<br>You can update them at any time.
     </div>
-    <div class="form-row">
-      <label>Bot Token</label>
-      <input id="tgTok" value="${tgCfg.token}">
-    </div>
-    <div class="form-row">
-      <label>Group Chat ID</label>
-      <input id="tgChat" value="${tgCfg.chatId}">
-    </div>
+    <div class="form-row"><label>Bot Token</label><input id="tgTok" value="${tgCfg.token}"></div>
+    <div class="form-row"><label>Group Chat ID</label><input id="tgChat" value="${tgCfg.chatId}"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-      <label style="font-size:13px;font-weight:500;flex:1">បើក Auto-notification</label>
-      <input type="checkbox" id="tgEn" ${tgCfg.enabled?'checked':''} style="width:18px;height:18px;cursor:pointer">
+      <label style="font-size:13px;font-weight:500;flex:1">Enable Auto-notification</label>
+      <input type="checkbox" id="tgEn"${tgCfg.enabled?' checked':''} style="width:18px;height:18px;cursor:pointer">
     </div>`;
   document.getElementById('modalFoot').innerHTML=`
-    <button class="btn btn-white" onclick="closeModal()">បោះបង់</button>
-    <button class="btn" style="background:#fef3c7;color:#92400e;border:1px solid #fcd34d" onclick="testTg()">🧪 សាកល្បង</button>
-    <button class="btn btn-blue" onclick="saveTg()">💾 រក្សាទុក</button>`;
+    <button class="btn btn-white" onclick="closeModal()">Cancel</button>
+    <button class="btn" style="background:#fef3c7;color:#92400e;border:1px solid #fcd34d" onclick="testTg()">🧪 Test</button>
+    <button class="btn btn-blue" onclick="saveTg()">💾 Save</button>`;
   document.getElementById('modal').style.display='flex';
 }
-
 function saveTg(){
   const tok=document.getElementById('tgTok').value.trim();
   const chat=document.getElementById('tgChat').value.trim();
   const en=document.getElementById('tgEn').checked;
-  if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
+  if(!tok||!chat){showToast('Please fill Token and Chat ID!','err');return;}
   tgCfg={token:tok,chatId:chat,enabled:en};
-  updateTgBar(); closeModal(); showToast('រក្សាទុករួចរាល់ ✓','ok');
+  updateTgBar();closeModal();showToast('Settings saved ✓','ok');
 }
-
 async function testTg(){
   const tok=document.getElementById('tgTok').value.trim();
   const chat=document.getElementById('tgChat').value.trim();
-  if(!tok||!chat){showToast('សូមបំពេញ Token និង Chat ID!','err');return;}
-  showToast('កំពុងផ្ញើ Image សាកល្បង...','info');
-  const old={...tgCfg}; tgCfg={token:tok,chatId:chat,enabled:true};
-  const ok=await doSendImage(buildImage(null,null)); tgCfg=old;
-  if(ok) showToast('ផ្ញើ Image ជោគជ័យ ✓','ok');
+  if(!tok||!chat){showToast('Please fill Token and Chat ID!','err');return;}
+  showToast('Sending test image...','info');
+  const old={...tgCfg};tgCfg={token:tok,chatId:chat,enabled:true};
+  const ok=await doSendImage(buildImage(null,null));tgCfg=old;
+  if(ok)showToast('Test image sent ✓','ok');
 }
-
 function updateTgBar(){
   document.getElementById('tgDot').className='tg-dot'+(tgCfg.enabled?'':' off');
   document.getElementById('tgBarSub').textContent=tgCfg.enabled
-    ?'Auto-notification បើក — ផ្ញើ Image ស្អាតដូច Excel ទៅ Group'
-    :'Auto-notification បិទ — ចុច "📊 ផ្ញើរបាយការណ៍" ដោយដៃ';
-  document.getElementById('tgToggleBtn').textContent=tgCfg.enabled?'បិទ':'បើក';
+    ?'Auto-notification ON — sends image report to group'
+    :'Auto-notification OFF — use "Send Report" manually';
+  document.getElementById('tgToggleBtn').textContent=tgCfg.enabled?'Turn Off':'Turn On';
 }
+function toggleTg(){tgCfg.enabled=!tgCfg.enabled;updateTgBar();showToast(tgCfg.enabled?'Notification enabled':'Notification disabled','info');}
 
-function toggleTg(){
-  tgCfg.enabled=!tgCfg.enabled; updateTgBar();
-  showToast(tgCfg.enabled?'Notification បើករួចរាល់':'Notification បិទរួចរាល់','info');
+/* ═══════════════════════════════════════════════════
+   SHARED CANVAS DRAWING HELPERS  (returned as object)
+═══════════════════════════════════════════════════ */
+function makeCanvas(W,H){
+  const DPR=2;
+  const cv=document.getElementById('cv');
+  cv.width=W*DPR;cv.height=H*DPR;
+  const ctx=cv.getContext('2d');ctx.scale(DPR,DPR);
+  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,W,H);
+  const F=(sz,bold=false)=>`${bold?'bold ':''}${sz}px 'Inter',Arial,sans-serif`;
+  const fill=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h);};
+  const hline=(y,c='#dde1e8',lw=.5)=>{ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(PAD,y);ctx.lineTo(W-PAD,y);ctx.stroke();};
+  const vline=(x,y,h,c='#dde1e8')=>{ctx.strokeStyle=c;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+h);ctx.stroke();};
+  const txt=(str,x,y,sz,color,align='left',bold=false,maxW=0)=>{ctx.font=F(sz,bold);ctx.fillStyle=color;ctx.textAlign=align;maxW?ctx.fillText(str,x,y,maxW):ctx.fillText(str,x,y);};
+  const rrect=(x,y,w,h,r,c)=>{ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.fill();};
+  const badge=(label,cx,cy,bg,fg)=>{ctx.font=F(10.5);const tw=ctx.measureText(label).width;rrect(cx-tw/2-7,cy-13,tw+14,17,8,bg);txt(label,cx,cy,10.5,fg,'center');};
+  return{ctx,fill,hline,vline,txt,rrect,badge,F};
 }
+const PAD=22;
 
-/* ═══════════════════════════════════
-   IMAGE BUILDER
-═══════════════════════════════════ */
-function buildImage(action,hs){
-  const DPR=2,W=940,PAD=22,RH=30,HH=36,SH=32;
-  const navy='#0f2744',blue='#1a56db',blueLt='#e8f0fe',
-        green='#0d7a4a',greenLt='#e6f7f0',
-        amber='#b45309',amberLt='#fef3c7',
-        red='#b91c1c',redLt='#fee2e2',
-        pink='#9d174d',pinkLt='#fce7f3',
-        gray='#6b7280',lightGray='#f0f2f5',border='#dde1e8',
-        white='#ffffff',textC='#111827',stripe='#f9fafb';
+/* ═══════════════════════════
+   IMAGE 1 — STAFF REPORT
+═══════════════════════════ */
+function buildStaffImage(action,hs){
+  const W=940,RH=30,HH=36,SH=32;
+  const navy='#0f2744',blue='#1a56db',blueLt='#e8f0fe',green='#0d7a4a',greenLt='#e6f7f0',
+        amber='#b45309',amberLt='#fef3c7',red='#b91c1c',redLt='#fee2e2',
+        pink='#9d174d',pinkLt='#fce7f3',gray='#6b7280',lightGray='#f0f2f5',
+        border='#dde1e8',white='#ffffff',textC='#111827',stripe='#f9fafb';
 
-  const total=staff.length,
-        male=staff.filter(s=>s.sex==='ប្រុស').length,
-        fem=staff.filter(s=>s.sex==='ស្រី').length,
-        act=staff.filter(s=>s.status==='កំពុងធ្វើការ').length,
-        res=staff.filter(s=>s.status==='ឈប់ខ្លួនឯង').length,
-        ter=staff.filter(s=>s.status==='ត្រូវបញ្ឈប់').length;
-
+  const total=staff.length,male=staff.filter(s=>s.sex==='Male').length,
+        fem=staff.filter(s=>s.sex==='Female').length,
+        act=staff.filter(s=>s.status==='Active').length,
+        res=staff.filter(s=>s.status==='Resigned').length,
+        ter=staff.filter(s=>s.status==='Terminated').length;
   const dm={};
-  staff.forEach(s=>{
-    const k=s.dept||'មិនកំណត់';
-    if(!dm[k]) dm[k]={t:0,m:0,f:0,a:0,r:0,d:0};
-    dm[k].t++; s.sex==='ប្រុស'?dm[k].m++:dm[k].f++;
-    if(s.status==='កំពុងធ្វើការ') dm[k].a++;
-    else if(s.status==='ឈប់ខ្លួនឯង') dm[k].r++;
-    else dm[k].d++;
-  });
+  staff.forEach(s=>{const k=s.dept||'Unassigned';if(!dm[k])dm[k]={t:0,m:0,f:0,a:0,r:0,d:0};dm[k].t++;s.sex==='Male'?dm[k].m++:dm[k].f++;if(s.status==='Active')dm[k].a++;else if(s.status==='Resigned')dm[k].r++;else dm[k].d++;});
   const depts=Object.entries(dm).sort((a,b)=>b[1].t-a[1].t);
 
-  const TITLE_H=62,STAT_H=92,
-        DEPT_H=SH+HH+depts.length*RH+RH+6,
-        STAFF_H=SH+HH+Math.max(staff.length,1)*RH+6,
-        ALERT_H=hs?52:0,FOOT_H=28;
+  const TITLE_H=62,STAT_H=92,DEPT_H=SH+HH+depts.length*RH+RH+6,
+        STAFF_H=SH+HH+Math.max(staff.length,1)*RH+6,ALERT_H=hs?52:0,FOOT_H=28;
   const H=PAD+TITLE_H+14+STAT_H+14+DEPT_H+14+STAFF_H+(ALERT_H?14+ALERT_H:0)+14+FOOT_H+PAD;
 
-  const cv=document.getElementById('cv');
-  cv.width=W*DPR; cv.height=H*DPR;
-  const ctx=cv.getContext('2d');
-  ctx.scale(DPR,DPR);
-  ctx.fillStyle=white; ctx.fillRect(0,0,W,H);
+  const {fill,hline,vline,txt,rrect,badge}=makeCanvas(W,H);
+  let y=PAD,cx;
 
-  let y=PAD;
-  const F=(sz,bold=false)=>`${bold?'bold ':''}${sz}px 'Noto Sans Khmer',Arial,sans-serif`;
-  const fill=(x,yy,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,yy,w,h);};
-  const hline=(yy,c=border,lw=.5)=>{ctx.strokeStyle=c;ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(PAD,yy);ctx.lineTo(W-PAD,yy);ctx.stroke();};
-  const vline=(x,yy,h,c=border)=>{ctx.strokeStyle=c;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x,yy+h);ctx.stroke();};
-  const txt=(str,x,yy,sz,color,align='left',bold=false,maxW=0)=>{
-    ctx.font=F(sz,bold);ctx.fillStyle=color;ctx.textAlign=align;
-    maxW?ctx.fillText(str,x,yy,maxW):ctx.fillText(str,x,yy);
-  };
-  const rrect=(x,yy,w,h,r,c)=>{
-    ctx.fillStyle=c;ctx.beginPath();
-    ctx.moveTo(x+r,yy);ctx.lineTo(x+w-r,yy);ctx.quadraticCurveTo(x+w,yy,x+w,yy+r);
-    ctx.lineTo(x+w,yy+h-r);ctx.quadraticCurveTo(x+w,yy+h,x+w-r,yy+h);
-    ctx.lineTo(x+r,yy+h);ctx.quadraticCurveTo(x,yy+h,x,yy+h-r);
-    ctx.lineTo(x,yy+r);ctx.quadraticCurveTo(x,yy,x+r,yy);ctx.closePath();ctx.fill();
-  };
-  const badge=(label,cx,cy,bg,fg)=>{
-    ctx.font=F(10.5);const tw=ctx.measureText(label).width;
-    rrect(cx-tw/2-7,cy-13,tw+14,17,8,bg);
-    txt(label,cx,cy,10.5,fg,'center');
-  };
-
-  /* TITLE */
+  // Title bar
   fill(PAD,y,W-PAD*2,TITLE_H,navy);
-  txt('📊  របាយការណ៍គ្រប់គ្រងបុគ្គលិក',PAD+16,y+22,14,white,'left',true);
-  txt('Staff Management Report',PAD+16,y+42,11,'#90a4c8');
-  txt('🕐 '+new Date().toLocaleString('km-KH'),W-PAD-8,y+24,11,'#90a4c8','right');
-  txt('សរុប: '+total+' នាក់',W-PAD-8,y+42,11,'#7ec8e3','right');
+  txt('📊  Staff Management Report — Image 1/2',PAD+16,y+22,14,white,'left',true);
+  txt('Staff list & department statistics',PAD+16,y+42,11,'#90a4c8');
+  txt('🕐 '+new Date().toLocaleString(),W-PAD-8,y+24,11,'#90a4c8','right');
+  txt('Total: '+total+' staff',W-PAD-8,y+42,11,'#7ec8e3','right');
   y+=TITLE_H+14;
 
-  /* STAT CARDS */
-  const cards=[
-    {l:'👥 សរុប',v:total,pv:'',bg:navy,fg:white,vfg:'#7ec8e3'},
-    {l:'👨 ប្រុស',v:male,pv:pct(male,total)+'%',bg:blueLt,fg:blue,vfg:blue},
-    {l:'👩 ស្រី',v:fem,pv:pct(fem,total)+'%',bg:pinkLt,fg:pink,vfg:pink},
-    {l:'🟢 ធ្វើការ',v:act,pv:pct(act,total)+'%',bg:greenLt,fg:green,vfg:green},
-    {l:'🟡 ឈប់',v:res,pv:pct(res,total)+'%',bg:amberLt,fg:amber,vfg:amber},
-    {l:'🔴 បញ្ឈប់',v:ter,pv:pct(ter,total)+'%',bg:redLt,fg:red,vfg:red},
-  ];
+  // Stat cards
+  const cards=[{l:'Total',v:total,pv:'',bg:navy,fg:white,vfg:'#7ec8e3'},{l:'Male',v:male,pv:pct(male,total)+'%',bg:blueLt,fg:blue,vfg:blue},{l:'Female',v:fem,pv:pct(fem,total)+'%',bg:pinkLt,fg:pink,vfg:pink},{l:'Active',v:act,pv:pct(act,total)+'%',bg:greenLt,fg:green,vfg:green},{l:'Resigned',v:res,pv:pct(res,total)+'%',bg:amberLt,fg:amber,vfg:amber},{l:'Terminated',v:ter,pv:pct(ter,total)+'%',bg:redLt,fg:red,vfg:red}];
   const CW=(W-PAD*2-10*5)/6;
-  cards.forEach((c,i)=>{
-    const cx=PAD+i*(CW+10);
-    rrect(cx,y,CW,STAT_H-4,8,c.bg);
-    if(c.bg!==navy){ctx.strokeStyle=c.fg+'44';ctx.lineWidth=.5;ctx.strokeRect(cx,y,CW,STAT_H-4);}
-    txt(c.l,cx+8,y+18,10.5,c.fg,'left',false,CW-10);
-    txt(String(c.v),cx+CW/2,y+56,22,c.vfg,'center',true);
-    if(c.pv) txt(c.pv,cx+CW/2,y+74,10,c.fg,'center');
-  });
+  cards.forEach((c,i)=>{const x=PAD+i*(CW+10);rrect(x,y,CW,STAT_H-4,8,c.bg);if(c.bg!==navy){const cv2=document.getElementById('cv').getContext('2d');cv2.strokeStyle=c.fg+'44';cv2.lineWidth=.5;cv2.strokeRect(x,y,CW,STAT_H-4);}txt(c.l,x+8,y+18,10.5,c.fg,'left',false,CW-10);txt(String(c.v),x+CW/2,y+56,22,c.vfg,'center',true);if(c.pv)txt(c.pv,x+CW/2,y+74,10,c.fg,'center');});
   y+=STAT_H+14;
 
-  /* DEPT TABLE */
-  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
-  txt('🏢  ស្ថិតិតាមនាយកដ្ឋាន',PAD+12,y+SH/2+5,12,white,'left',true);
-  y+=SH;
-  const DC=[{l:'នាយកដ្ឋាន',w:185,a:'left'},{l:'សរុប',w:65,a:'center'},{l:'👨 ប្រុស',w:75,a:'center'},{l:'👩 ស្រី',w:75,a:'center'},{l:'🟢 ធ្វើការ',w:95,a:'center'},{l:'🟡 ឈប់',w:90,a:'center'},{l:'🔴 បញ្ឈប់',w:90,a:'center'}];
-  const DTW=DC.reduce((s,c)=>s+c.w,0);
-  const DX=PAD+(W-PAD*2-DTW)/2;
-  let cx=DX;
-  DC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:10),y+HH/2+5,11,white,c.a,true,c.w-8);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
+  // Dept table
+  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');txt('🏢  Statistics by Department',PAD+12,y+SH/2+5,12,white,'left',true);y+=SH;
+  const DC=[{l:'Department',w:185,a:'left'},{l:'Total',w:65,a:'center'},{l:'Male',w:75,a:'center'},{l:'Female',w:75,a:'center'},{l:'Active',w:95,a:'center'},{l:'Resigned',w:90,a:'center'},{l:'Terminated',w:90,a:'center'}];
+  const DTW=DC.reduce((a,c)=>a+c.w,0),DX=PAD+(W-PAD*2-DTW)/2;
+  cx=DX;DC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:10),y+HH/2+5,11,white,c.a,true,c.w-8);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
   hline(y,blue);hline(y+HH,blue);y+=HH;
-  depts.forEach(([dept,d],idx)=>{
-    const bg=idx%2===0?white:stripe; cx=DX;
-    fill(DX,y,DTW,RH,bg);
-    [dept,d.t,d.m,d.f,d.a,d.r,d.d].forEach((v,i)=>{
-      txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,i===0?textC:gray,DC[i].a,i===0,DC[i].w-8);
-      vline(cx,y,RH); cx+=DC[i].w;
-    });
-    hline(y+RH); y+=RH;
-  });
-  // total row
-  fill(DX,y,DTW,RH,'#dbeafe'); cx=DX;
-  ['សរុប',total,male,fem,act,res,ter].forEach((v,i)=>{
-    txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,navy,DC[i].a,true,DC[i].w-8);
-    vline(cx,y,RH,navy+'55'); cx+=DC[i].w;
-  });
+  depts.forEach(([dept,d],idx)=>{const bg=idx%2===0?white:stripe;cx=DX;fill(DX,y,DTW,RH,bg);[dept,d.t,d.m,d.f,d.a,d.r,d.d].forEach((v,i)=>{txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,i===0?textC:gray,DC[i].a,i===0,DC[i].w-8);vline(cx,y,RH);cx+=DC[i].w;});hline(y+RH);y+=RH;});
+  fill(DX,y,DTW,RH,'#dbeafe');cx=DX;['Total',total,male,fem,act,res,ter].forEach((v,i)=>{txt(String(v),cx+(DC[i].a==='center'?DC[i].w/2:10),y+RH/2+5,12,navy,DC[i].a,true,DC[i].w-8);vline(cx,y,RH,navy+'55');cx+=DC[i].w;});
   hline(y,navy+'44');hline(y+RH,navy+'44');
-  ctx.strokeStyle=navy+'33';ctx.lineWidth=1;ctx.strokeRect(DX,y-depts.length*RH-HH,DTW,depts.length*RH+HH+RH);
+  const cv2=document.getElementById('cv').getContext('2d');cv2.strokeStyle=navy+'33';cv2.lineWidth=1;cv2.strokeRect(DX,y-depts.length*RH-HH,DTW,depts.length*RH+HH+RH);
   y+=RH+14;
 
-  /* STAFF LIST */
-  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');
-  txt('📝  បញ្ជីបុគ្គលិកទាំងអស់  ('+staff.length+' នាក់)',PAD+12,y+SH/2+5,12,white,'left',true);
-  y+=SH;
-  const SC=[{l:'#',w:36,a:'center'},{l:'ឈ្មោះ',w:190,a:'left'},{l:'ភេទ',w:72,a:'center'},{l:'នាយកដ្ឋាន',w:150,a:'left'},{l:'ចូលធ្វើការ',w:105,a:'center'},{l:'ស្ថានភាព',w:130,a:'center'},{l:'ថ្ងៃឈប់',w:105,a:'center'}];
-  const STW=SC.reduce((s,c)=>s+c.w,0);
-  const SX=PAD+(W-PAD*2-STW)/2;
-  cx=SX;
-  SC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
+  // Staff list
+  fill(PAD,y,W-PAD*2,SH,'#1e3a5f');txt('📝  All Staff List ('+staff.length+' people)',PAD+12,y+SH/2+5,12,white,'left',true);y+=SH;
+  const SC=[{l:'#',w:36,a:'center'},{l:'Name',w:190,a:'left'},{l:'Gender',w:72,a:'center'},{l:'Department',w:150,a:'left'},{l:'Join Date',w:105,a:'center'},{l:'Status',w:130,a:'center'},{l:'Leave Date',w:105,a:'center'}];
+  const STW=SC.reduce((a,c)=>a+c.w,0),SX=PAD+(W-PAD*2-STW)/2;
+  cx=SX;SC.forEach(c=>{fill(cx,y,c.w,HH,blue);txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,11,white,c.a,true,c.w-6);vline(cx,y,HH,'#2563eb88');cx+=c.w;});
   hline(y,blue);hline(y+HH,blue);y+=HH;
-
   staff.forEach((s2,idx)=>{
-    const isHL=hs&&s2.id===hs.id;
-    const bg=isHL?'#fefce8':idx%2===0?white:stripe;
-    const stBg=s2.status==='កំពុងធ្វើការ'?greenLt:s2.status==='ឈប់ខ្លួនឯង'?amberLt:redLt;
-    const stFg=s2.status==='កំពុងធ្វើការ'?green:s2.status==='ឈប់ខ្លួនឯង'?amber:red;
-    const sxBg=s2.sex==='ប្រុស'?blueLt:pinkLt;
-    const sxFg=s2.sex==='ប្រុស'?blue:pink;
-    cx=SX; fill(SX,y,STW,RH,bg);
-    SC.forEach((c,i)=>{
-      const midX=cx+c.w/2, midY=y+RH/2+5;
-      if(i===2) badge(s2.sex,midX,midY,sxBg,sxFg);
-      else if(i===5) badge(s2.status,midX,midY,stBg,stFg);
-      else{
-        const vals=[String(idx+1),s2.name,'',s2.dept||'—',s2.joinDate||'—','',s2.leaveDate||'—'];
-        txt(vals[i],c.a==='center'?midX:cx+8,midY,12,i===1?textC:gray,c.a,i===1,c.w-8);
-      }
-      vline(cx,y,RH); cx+=c.w;
-    });
-    hline(y+RH); y+=RH;
+    const isHL=hs&&s2.id===hs.id,bg=isHL?'#fefce8':idx%2===0?white:stripe;
+    const stBg=s2.status==='Active'?greenLt:s2.status==='Resigned'?amberLt:redLt;
+    const stFg=s2.status==='Active'?green:s2.status==='Resigned'?amber:red;
+    const sxBg=s2.sex==='Male'?blueLt:pinkLt,sxFg=s2.sex==='Male'?blue:pink;
+    cx=SX;fill(SX,y,STW,RH,bg);
+    SC.forEach((c,i)=>{const midX=cx+c.w/2,midY=y+RH/2+5;
+      if(i===2)badge(s2.sex,midX,midY,sxBg,sxFg);
+      else if(i===5)badge(s2.status,midX,midY,stBg,stFg);
+      else{const vals=[String(idx+1),s2.name,'',s2.dept||'—',s2.joinDate||'—','',s2.leaveDate||'—'];txt(vals[i],c.a==='center'?midX:cx+8,midY,12,i===1?textC:gray,c.a,i===1,c.w-8);}
+      vline(cx,y,RH);cx+=c.w;});
+    hline(y+RH);y+=RH;
   });
-  ctx.strokeStyle=border;ctx.lineWidth=1;ctx.strokeRect(SX,y-staff.length*RH-HH,STW,staff.length*RH+HH);
+  cv2.strokeStyle=border;cv2.lineWidth=1;cv2.strokeRect(SX,y-staff.length*RH-HH,STW,staff.length*RH+HH);
 
-  /* ALERT */
+  // Alert banner
   if(hs&&action){
     y+=14;
     const aBg=action==='ADD'?greenLt:action==='EDIT'?amberLt:redLt;
     const aFg=action==='ADD'?green:action==='EDIT'?amber:red;
-    const aLbl=action==='ADD'?'✅ បន្ថែមថ្មី — ':action==='EDIT'?'✏️ បានកែប្រែ — ':'🗑️ បានលុប — ';
-    rrect(PAD,y,W-PAD*2,ALERT_H,8,aBg);
-    ctx.strokeStyle=aFg+'55';ctx.lineWidth=.5;ctx.strokeRect(PAD,y,W-PAD*2,ALERT_H);
+    const aLbl=action==='ADD'?'✅ Added — ':action==='EDIT'?'✏️ Edited — ':'🗑️ Deleted — ';
+    rrect(PAD,y,W-PAD*2,ALERT_H,8,aBg);cv2.strokeStyle=aFg+'55';cv2.lineWidth=.5;cv2.strokeRect(PAD,y,W-PAD*2,ALERT_H);
     txt(aLbl+hs.name,PAD+14,y+17,12,aFg,'left',true);
-    txt((hs.dept||'')+(hs.joinDate?' | ចូល: '+hs.joinDate:'')+(hs.leaveDate?' | ឈប់: '+hs.leaveDate:'')+' | '+hs.status,PAD+14,y+35,11,aFg);
+    txt((hs.dept||'')+(hs.joinDate?' | Join: '+hs.joinDate:'')+(hs.leaveDate?' | Leave: '+hs.leaveDate:'')+' | '+hs.status,PAD+14,y+35,11,aFg);
     y+=ALERT_H;
   }
-
-  /* FOOTER */
-  y+=14; hline(y,lightGray);
-  txt('ប្រព័ន្ធគ្រប់គ្រងបុគ្គលិក — Staff Management System',PAD,y+18,10,gray);
+  y+=14;hline(y,lightGray);
+  txt('Staff Management System — Auto Report',PAD,y+18,10,gray);
   txt('Generated: '+new Date().toLocaleString(),W-PAD,y+18,10,gray,'right');
-  return cv.toDataURL('image/png');
+  return document.getElementById('cv').toDataURL('image/png');
 }
 
 /* ═══════════════════════════════════
-   TELEGRAM SEND
+   IMAGE 2 — ATTENDANCE / LATE REPORT
 ═══════════════════════════════════ */
-async function doSendImage(dataUrl){
-  if(!tgCfg.token||!tgCfg.chatId) return false;
+function buildAttendImage(){
+  const {m,y:yr}=getMY();
+  const W=1060,RH=32,HH=38,SH=34;
+  const navy='#0f2744',blue='#1a56db',indigo='#312e81',
+        green='#0d7a4a',greenLt='#e6f7f0',
+        amber='#b45309',amberLt='#fef3c7',
+        red='#b91c1c',redLt='#fee2e2',
+        purple='#6d28d9',purpleLt='#ede9fe',
+        gray='#6b7280',lightGray='#f0f2f5',
+        border='#dde1e8',white='#ffffff',textC='#111827',stripe='#f9fafb';
+
+  const activeStaff=staff.filter(s=>s.status==='Active');
+  // gather all data
+  const rows=activeStaff.map(s=>{
+    const rec=attRec(s.id,m,yr);
+    const lates=rec.lates||[];
+    const totMin=lates.reduce((acc,l)=>acc+l.min,0);
+    const heavy=lates.filter(l=>l.type==='heavy').length;
+    const med=lates.filter(l=>l.type==='medium').length;
+    const light=lates.filter(l=>l.type==='light').length;
+    return{s,lates,totMin,heavy,med,light,abs:parseInt(rec.absences)||0,wh:rec.workHours!==''?rec.workHours:'—'};
+  });
+
+  // summary totals
+  const sumLate=rows.reduce((a,r)=>a+r.lates.length,0);
+  const sumMin=rows.reduce((a,r)=>a+r.totMin,0);
+  const sumAbs=rows.reduce((a,r)=>a+r.abs,0);
+  const sumHeavy=rows.reduce((a,r)=>a+r.heavy,0);
+  const sumMed=rows.reduce((a,r)=>a+r.med,0);
+  const sumLight=rows.reduce((a,r)=>a+r.light,0);
+
+  // heights
+  const TITLE_H=68, SUM_H=80, TABLE_H=HH+rows.length*RH+6, FOOT_H=36;
+  const H=PAD+TITLE_H+12+SUM_H+12+SH+TABLE_H+12+FOOT_H+PAD;
+
+  const {fill,hline,vline,txt,rrect,badge}=makeCanvas(W,H);
+  let y=PAD,cx;
+
+  // Title
+  fill(PAD,y,W-PAD*2,TITLE_H,indigo);
+  txt('⏰  Attendance & Late Arrival Report — Image 2/2',PAD+16,y+24,14,white,'left',true);
+  txt('Month: '+MONTHS[m]+' '+yr+' — Active staff: '+activeStaff.length+' people',PAD+16,y+46,11,'#a5b4fc');
+  txt('🕐 '+new Date().toLocaleString(),W-PAD-8,y+28,11,'#a5b4fc','right');
+  y+=TITLE_H+12;
+
+  // Summary bar (6 cards)
+  const sumCards=[
+    {l:'Times Late',v:sumLate,sub:sumMin+' min total',bg:'#fee2e2',fg:red},
+    {l:'Heavy Late ≥30m',v:sumHeavy,sub:'instances',bg:'#fee2e2',fg:red},
+    {l:'Medium Late 15-29m',v:sumMed,sub:'instances',bg:amberLt,fg:amber},
+    {l:'Light Late <15m',v:sumLight,sub:'instances',bg:'#dbeafe',fg:'#1d4ed8'},
+    {l:'Total Absences',v:sumAbs,sub:'days (all staff)',bg:amberLt,fg:amber},
+    {l:'Active Staff',v:activeStaff.length,sub:'in this report',bg:greenLt,fg:green},
+  ];
+  const SCW=(W-PAD*2-10*5)/6;
+  sumCards.forEach((c,i)=>{
+    const x=PAD+i*(SCW+10);
+    rrect(x,y,SCW,SUM_H-4,8,c.bg);
+    const ctx2=document.getElementById('cv').getContext('2d');ctx2.strokeStyle=c.fg+'44';ctx2.lineWidth=.5;ctx2.strokeRect(x,y,SCW,SUM_H-4);
+    txt(c.l,x+8,y+16,9.5,c.fg,'left',false,SCW-10);
+    txt(String(c.v),x+SCW/2,y+52,20,c.fg,'center',true);
+    txt(c.sub,x+SCW/2,y+68,9,c.fg,'center');
+  });
+  y+=SUM_H+12;
+
+  // Section header
+  fill(PAD,y,W-PAD*2,SH,indigo);
+  txt('📋  Late Arrivals & Working Hours Log — '+MONTHS[m]+' '+yr,PAD+12,y+SH/2+5,12,white,'left',true);
+  y+=SH;
+
+  // Table columns
+  const TC=[
+    {l:'#',      w:34, a:'center'},
+    {l:'Name',   w:160,a:'left'},
+    {l:'Dept',   w:130,a:'left'},
+    {l:'🔴 Heavy\n≥30 min', w:72, a:'center'},
+    {l:'🟡 Medium\n15–29 min',w:80,a:'center'},
+    {l:'🔵 Light\n<15 min',  w:72, a:'center'},
+    {l:'Times\nLate',        w:60, a:'center'},
+    {l:'Total\nMin Late',    w:72, a:'center'},
+    {l:'Absences\n(days)',   w:78, a:'center'},
+    {l:'Work Hrs\n/ Month',  w:84, a:'center'},
+  ];
+  const TTW=TC.reduce((a,c)=>a+c.w,0),TX=PAD+(W-PAD*2-TTW)/2;
+
+  // Header row
+  cx=TX;
+  TC.forEach(c=>{
+    fill(cx,y,c.w,HH,blue);
+    // two-line header
+    const lines=c.l.split('\n');
+    if(lines.length===2){
+      txt(lines[0],cx+(c.a==='center'?c.w/2:8),y+14,9.5,white,c.a,true,c.w-6);
+      txt(lines[1],cx+(c.a==='center'?c.w/2:8),y+28,9,white,c.a,false,c.w-6);
+    } else {
+      txt(c.l,cx+(c.a==='center'?c.w/2:8),y+HH/2+5,10,white,c.a,true,c.w-6);
+    }
+    vline(cx,y,HH,'#2563eb88');cx+=c.w;
+  });
+  hline(y,blue);hline(y+HH,blue);y+=HH;
+
+  // Data rows
+  rows.forEach((r,idx)=>{
+    const bg=idx%2===0?white:stripe;
+    fill(TX,y,TTW,RH,bg);
+    cx=TX;
+    const vals=[
+      String(idx+1),
+      r.s.name,
+      r.s.dept||'—',
+      r.heavy>0?String(r.heavy):'—',
+      r.med>0?String(r.med):'—',
+      r.light>0?String(r.light):'—',
+      r.lates.length>0?r.lates.length+'×':'—',
+      r.totMin>0?r.totMin+' min':'—',
+      r.abs>0?String(r.abs):'0',
+      String(r.wh),
+    ];
+    const colors=[gray,textC,gray,
+      r.heavy>0?red:gray,
+      r.med>0?amber:gray,
+      r.light>0?'#1d4ed8':gray,
+      r.lates.length>0?navy:gray,
+      r.totMin>0?(r.totMin>=60?red:r.totMin>=30?amber:'#1d4ed8'):gray,
+      r.abs>0?amber:gray,
+      r.wh!=='—'?green:gray,
+    ];
+    TC.forEach((c,i)=>{
+      const midX=cx+c.w/2,midY=y+RH/2+5;
+      const bold=(i===1)||(i===6&&r.lates.length>0)||(i===7&&r.totMin>0);
+      txt(vals[i],c.a==='center'?midX:cx+7,midY,i===1?12:11,colors[i],c.a,bold,c.w-8);
+      vline(cx,y,RH);cx+=c.w;
+    });
+    hline(y+RH);y+=RH;
+  });
+
+  // Totals row
+  fill(TX,y,TTW,RH,'#e0e7ff');cx=TX;
+  const totVals=['','TOTAL','',
+    sumHeavy>0?String(sumHeavy):'0',
+    sumMed>0?String(sumMed):'0',
+    sumLight>0?String(sumLight):'0',
+    sumLate+'×',
+    sumMin+' min',
+    String(sumAbs),
+    '—'];
+  TC.forEach((c,i)=>{
+    txt(totVals[i],c.a==='center'?cx+c.w/2:cx+7,y+RH/2+5,11,navy,c.a,true,c.w-6);
+    vline(cx,y,RH,navy+'55');cx+=c.w;
+  });
+  hline(y,navy+'44');hline(y+RH,navy+'44');
+  const ctx3=document.getElementById('cv').getContext('2d');
+  ctx3.strokeStyle=border;ctx3.lineWidth=1;ctx3.strokeRect(TX,y-rows.length*RH-HH,TTW,rows.length*RH+HH+RH);
+  y+=RH+12;
+
+  // Footer
+  hline(y,lightGray);
+  txt('Staff Management System — Attendance Report  |  🔴 Heavy ≥30min   🟡 Medium 15–29min   🔵 Light <15min',PAD,y+22,9.5,gray);
+  txt('Generated: '+new Date().toLocaleString(),W-PAD,y+22,9.5,gray,'right');
+  return document.getElementById('cv').toDataURL('image/png');
+}
+
+// Legacy wrapper so existing callers still work
+function buildImage(action,hs){ return buildStaffImage(action,hs); }
+
+/* ═══════════════════════════
+   TELEGRAM SEND
+═══════════════════════════ */
+async function doSendImage(dataUrl, caption){
+  if(!tgCfg.token||!tgCfg.chatId)return false;
   try{
     const blob=await(await fetch(dataUrl)).blob();
     const fd=new FormData();
     fd.append('chat_id',tgCfg.chatId);
     fd.append('photo',blob,'report.png');
-    fd.append('caption','📊 របាយការណ៍គ្រប់គ្រងបុគ្គលិក\n🕐 '+new Date().toLocaleString('km-KH'));
+    fd.append('caption',caption||'📊 Staff Management Report\n🕐 '+new Date().toLocaleString());
     fd.append('parse_mode','HTML');
     const r=await fetch(`https://api.telegram.org/bot${tgCfg.token}/sendPhoto`,{method:'POST',body:fd});
     const d=await r.json();
@@ -703,40 +1078,64 @@ async function doSendImage(dataUrl){
   }catch(e){showToast('Error: '+e.message,'err');return false;}
 }
 
+async function sendBothImages(action,hs){
+  const {m,y}=getMY();
+
+  // Build BOTH images first before sending.
+  // Both share the same <canvas>, so we must snapshot each dataURL
+  // immediately after drawing — before the next draw overwrites it.
+  const dataUrl1 = buildStaffImage(action, hs);  // draw staff  -> snapshot
+  const dataUrl2 = buildAttendImage();             // draw attend -> snapshot
+
+  const cap1=(action&&hs)
+    ?`📊 Staff Report (1/2) — ${action}: ${hs.name}\n${hs.dept||''} | ${hs.status}\n🕐 ${new Date().toLocaleString()}`
+    :`📊 Staff Report (1/2)\n🕐 ${new Date().toLocaleString()}`;
+  const cap2=`⏰ Attendance Report (2/2) — ${MONTHS[m]} ${y}\nActive staff: ${staff.filter(s=>s.status==='Active').length} people\n🕐 ${new Date().toLocaleString()}`;
+
+  // Send image 1
+  showToast('Sending image 1/2 to Telegram...','info');
+  const ok1=await doSendImage(dataUrl1, cap1);
+  if(!ok1){ showToast('Failed to send image 1','err'); return false; }
+
+  // Pause to avoid Telegram rate-limit
+  await new Promise(r=>setTimeout(r,1000));
+
+  // Send image 2
+  showToast('Sending image 2/2 to Telegram...','info');
+  const ok2=await doSendImage(dataUrl2, cap2);
+  return ok2;
+}
+
 async function sendAutoAlert(action,s){
-  if(!tgCfg.enabled||!tgCfg.token||!tgCfg.chatId) return;
-  showToast('កំពុងផ្ញើ Telegram...','info');
-  const ok=await doSendImage(buildImage(action,s));
-  if(ok) showToast('Telegram ✓','ok');
+  if(!tgCfg.enabled||!tgCfg.token||!tgCfg.chatId)return;
+  showToast('Sending 2 images to Telegram...','info');
+  const ok=await sendBothImages(action,s);
+  if(ok)showToast('Telegram sent ✓ (2 images)','ok');
 }
 
 async function sendReport(){
-  if(!tgCfg.token||!tgCfg.chatId){showToast('សូមកំណត់ Telegram ជាមុន!','err');return;}
-  showToast('កំពុងបង្កើត Image...','info');
-  const ok=await doSendImage(buildImage(null,null));
-  if(ok) showToast('ផ្ញើរបាយការណ៍ជោគជ័យ ✓','ok');
+  if(!tgCfg.token||!tgCfg.chatId){showToast('Please configure Telegram first!','err');return;}
+  showToast('Building & sending 2 images...','info');
+  const ok=await sendBothImages(null,null);
+  if(ok)showToast('Full report sent ✓ (2 images)','ok');
 }
 
-/* ═══════════════════════════════════
-   EXPORT CSV
-═══════════════════════════════════ */
+/* ═══════════════════════════
+   EXPORT STAFF CSV
+═══════════════════════════ */
 function exportCSV(){
-  const h=['#','ឈ្មោះ','ភេទ','នាយកដ្ឋាន','ចូលធ្វើការ','ស្ថានភាព','ថ្ងៃឈប់','កំណត់ចំណាំ'];
+  const h=['#','Name','Gender','Department','Join Date','Status','Leave Date','Note'];
   const rows=staff.map((s,i)=>[i+1,s.name,s.sex,s.dept||'',s.joinDate||'',s.status,s.leaveDate||'',s.note||'']);
   const csv=[h,...rows].map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
-  a.download='staff.csv'; a.click();
-  showToast('Export CSV ✓','ok');
+  a.download='staff.csv';a.click();showToast('CSV exported ✓','ok');
 }
 
-/* ═══════════════════════════════════
+/* ═══════════════════════════
    INIT
-═══════════════════════════════════ */
-updateTgBar();
-renderStats();
-refreshDepts();
-applyFilter();
+═══════════════════════════ */
+updateTgBar();renderStats();refreshDepts();applyFilter();renderMonthlySummary();renderAttendance();
 </script>
 </body>
 </html>
